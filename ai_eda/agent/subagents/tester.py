@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from ai_eda.agent.projects import get_project
+from ai_eda.agent.skills.rv32i5_ooo import artifact_metadata, manifest_source
 from ai_eda.rtl.runner import save_report, test_rtl
 
 from .base import SubAgent
@@ -36,7 +37,7 @@ class TesterAgent(SubAgent):
         for entry in entries:
             if not isinstance(entry, dict) or not isinstance(entry.get("path"), str) or not isinstance(entry.get("artifact"), str):
                 raise ValueError("RTL manifest 含有无效文件引用")
-            files[entry["path"]] = self.runtime.read_text_artifact(entry["artifact"])
+            files[entry["path"]] = manifest_source(self.runtime, entry)
         combined_ref = self.runtime.write_text_artifact(
             f"generated_attempt{attempt}.sv", combine_files(files)
         )
@@ -64,6 +65,8 @@ class TesterAgent(SubAgent):
             run_dir=tester_dir,
         )
         self.check_cancel()
+        if self.runtime.options.get("l3_mode"):
+            report.update(artifact_metadata(self.runtime, attempt))
         report_path = save_report(tester_dir, report)
         self.save_context(
             attempts=int(self.context.get("attempts", 0)) + 1,
@@ -78,8 +81,12 @@ class TesterAgent(SubAgent):
             report=report,
             feedback=report_feedback(report),
         )
-        target = "summary" if report.get("passed") else "modifier"
-        label = "Tester → Summary: final report artifact" if report.get("passed") else "Tester → Modifier: failure report artifact"
+        if report.get("passed"):
+            target, label = "summary", "Tester → Summary: final report artifact"
+        elif self.runtime.options.get("l3_mode"):
+            target, label = "diagnoser", "Tester → Diagnoser: failure report artifact"
+        else:
+            target, label = "modifier", "Tester → Modifier: failure report artifact"
         return self.runtime.write_handoff(
             "tester",
             target,

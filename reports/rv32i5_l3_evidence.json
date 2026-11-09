@@ -1,0 +1,2422 @@
+{
+  "project_id": "rv32i5_ooo",
+  "toolchain": {
+    "python": "3.10.12",
+    "iverilog": "11.0",
+    "yosys": "0.9",
+    "opensta": "3.2.0"
+  },
+  "first_execute_generation": {
+    "model": "DeepSeek-V4.1-Flash",
+    "usage": {
+      "prompt_tokens": 449,
+      "completion_tokens": 1687,
+      "total_tokens": 2136
+    },
+    "finish_reason": "stop",
+    "seconds": 7.35773377499936
+  },
+  "initial_teacher_results": {
+    "tb-01.log": [
+      "AI_EDA_TRACE|cycle=417|test=t02_alu_r|event=check_reg|halted=1|exit_code=66|detail=x8_exp=0x03000000_got=0x00000006_FAIL",
+      "AI_EDA_TRACE|cycle=418|test=t02_alu_r|event=check_reg|halted=1|exit_code=66|detail=x9_exp=0x1fffffff_got=0x3ffffffe_FAIL",
+      "AI_EDA_TRACE|cycle=418|test=t02_alu_r|event=check_reg|halted=1|exit_code=66|detail=x11_exp=0xffffffff_got=0xfffffffe_FAIL",
+      "AI_EDA_SUITE|name=base|passed=0|skipped=0|checks=104738",
+      "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+      "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+      "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+      "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+      "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=-1|expected=3|features=7",
+      "LAB_RESULT: FAIL (3 failures / 127737 checks)"
+    ],
+    "tb-02.log": [
+      "AI_EDA_SUITE|name=base|passed=1|skipped=0|checks=104738",
+      "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+      "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+      "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+      "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+      "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=3|expected=3|features=7",
+      "LAB_RESULT: PASS (21 tests, 127737 checks)"
+    ]
+  },
+  "supplemental_recovery": "L3_RECOVERY: PASS retired=13 stores=1 miss_overlap=3",
+  "runs": [
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T143807198834",
+      "project_id": "rv32i5_ooo",
+      "status": "failed",
+      "created_at": "2026-11-09T14:38:07.199+00:00",
+      "finished_at": "2026-11-09T14:38:43.800+00:00",
+      "workflow": "EDA Auto-Design Agent",
+      "duration_ms": 33669,
+      "tester_attempts": 0,
+      "model_calls": [
+        {
+          "step": 1,
+          "node_id": "parser",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 2400,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 13644,
+            "completion_tokens": 1336,
+            "total_tokens": 14980
+          },
+          "duration_ms": 20195,
+          "finish_reason": "stop"
+        },
+        {
+          "step": 2,
+          "node_id": "planner",
+          "status": "failed",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 2400,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 14694,
+            "completion_tokens": 2400,
+            "total_tokens": 17094
+          },
+          "duration_ms": null,
+          "finish_reason": "length"
+        }
+      ],
+      "api_total_tokens": 32074,
+      "known_api_tokens": 32074,
+      "calls_missing_usage": 0,
+      "teacher_passed": null,
+      "cpu_capability": null,
+      "metrics": null,
+      "performance": null
+    },
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T143807198923",
+      "project_id": "rv32i5_ooo",
+      "status": "passed",
+      "created_at": "2026-11-09T14:38:07.199+00:00",
+      "finished_at": "2026-11-09T14:38:09.754+00:00",
+      "workflow": "RV32I L3 Hybrid EDA Agent",
+      "duration_ms": 2555,
+      "tester_attempts": 1,
+      "model_calls": [],
+      "api_total_tokens": 0,
+      "known_api_tokens": 0,
+      "calls_missing_usage": 0,
+      "teacher_passed": true,
+      "cpu_capability": {
+        "level": 3,
+        "name": "rv32i",
+        "declared": 3,
+        "verified": 3,
+        "expected": 3,
+        "features": 7,
+        "declared_level": 3,
+        "verified_level": 3,
+        "expected_level": 3
+      },
+      "metrics": {
+        "status": "failed",
+        "reason": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T143807198923/artifacts/generated_attempt1.sv:725: ERROR: syntax error, unexpected TOK_GENVAR, expecting TOK_ID or '{'"
+      },
+      "performance": {
+        "benchmarks": [
+          {
+            "benchmark": "trained_branch64",
+            "cycles": 148,
+            "instructions": 132,
+            "branches": 64,
+            "mispredicts": 2,
+            "cpi": 1.121212,
+            "ipc": 0.891892
+          },
+          {
+            "benchmark": "teaching_crc32_64bytes",
+            "cycles": 4006,
+            "instructions": 3185,
+            "dmem_reads": 16,
+            "dmem_writes": 0,
+            "branches": 1088,
+            "mispredicts": 312,
+            "ooo_bypass": 7,
+            "clock_hz": 100000000,
+            "cpi": 1.257771,
+            "ipc": 0.795057
+          },
+          {
+            "benchmark": "teaching_array_sum64",
+            "cycles": 741,
+            "instructions": 324,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 15,
+            "clock_hz": 100000000,
+            "cpi": 2.287037,
+            "ipc": 0.437247
+          },
+          {
+            "benchmark": "teaching_branch_predict64",
+            "cycles": 480,
+            "instructions": 293,
+            "dmem_reads": 0,
+            "dmem_writes": 0,
+            "branches": 128,
+            "mispredicts": 66,
+            "ooo_bypass": 0,
+            "clock_hz": 100000000,
+            "cpi": 1.638225,
+            "ipc": 0.610417
+          },
+          {
+            "benchmark": "teaching_ooo_overlap64",
+            "cycles": 1583,
+            "instructions": 516,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 16,
+            "clock_hz": 100000000,
+            "cpi": 3.067829,
+            "ipc": 0.325963
+          }
+        ]
+      },
+      "teacher_reports": [
+        {
+          "artifact": "tester-01/test_report.json",
+          "sha256": "68d25b1f6416609c63e1e591cd1e508ecdbd81ec65f2f7c8b0dda88083f626a0",
+          "passed": true,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=1|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=3|expected=3|features=7",
+            "LAB_RESULT: PASS (21 tests, 127737 checks)"
+          ],
+          "first_deviation": null,
+          "synthesis_error": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T143807198923/artifacts/generated_attempt1.sv:725: ERROR: syntax error, unexpected TOK_GENVAR, expecting TOK_ID or '{'"
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T143808326368",
+      "project_id": "rv32i5_ooo",
+      "status": "failed",
+      "created_at": "2026-11-09T14:38:08.327+00:00",
+      "finished_at": "2026-11-09T14:38:34.192+00:00",
+      "workflow": "RV32I L3 Hybrid EDA Agent",
+      "duration_ms": 25865,
+      "tester_attempts": 4,
+      "model_calls": [
+        {
+          "step": 2,
+          "node_id": "diagnoser",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 600,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 1173,
+            "completion_tokens": 204,
+            "total_tokens": 1377
+          },
+          "duration_ms": 5845,
+          "finish_reason": "stop"
+        },
+        {
+          "step": 3,
+          "node_id": "patch",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 1800,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 2388,
+            "completion_tokens": 116,
+            "total_tokens": 2504
+          },
+          "duration_ms": 2913,
+          "finish_reason": "stop"
+        },
+        {
+          "step": 5,
+          "node_id": "diagnoser",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 600,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 1063,
+            "completion_tokens": 256,
+            "total_tokens": 1319
+          },
+          "duration_ms": 3310,
+          "finish_reason": "stop"
+        },
+        {
+          "step": 6,
+          "node_id": "patch",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 1800,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 2390,
+            "completion_tokens": 116,
+            "total_tokens": 2506
+          },
+          "duration_ms": 1660,
+          "finish_reason": "stop"
+        },
+        {
+          "step": 8,
+          "node_id": "diagnoser",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 600,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 1170,
+            "completion_tokens": 238,
+            "total_tokens": 1408
+          },
+          "duration_ms": 2641,
+          "finish_reason": "stop"
+        },
+        {
+          "step": 9,
+          "node_id": "patch",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 1800,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 2418,
+            "completion_tokens": 116,
+            "total_tokens": 2534
+          },
+          "duration_ms": 1115,
+          "finish_reason": "stop"
+        }
+      ],
+      "api_total_tokens": 11648,
+      "known_api_tokens": 11648,
+      "calls_missing_usage": 0,
+      "teacher_passed": false,
+      "cpu_capability": {
+        "level": 3,
+        "name": "rv32i",
+        "declared": 3,
+        "verified": -1,
+        "expected": 3,
+        "features": 7,
+        "declared_level": 3,
+        "verified_level": -1,
+        "expected_level": 3
+      },
+      "metrics": null,
+      "performance": {
+        "benchmarks": [
+          {
+            "benchmark": "trained_branch64",
+            "cycles": 148,
+            "instructions": 132,
+            "branches": 64,
+            "mispredicts": 2,
+            "cpi": 1.121212,
+            "ipc": 0.891892
+          },
+          {
+            "benchmark": "teaching_crc32_64bytes",
+            "cycles": 4006,
+            "instructions": 3185,
+            "dmem_reads": 16,
+            "dmem_writes": 0,
+            "branches": 1088,
+            "mispredicts": 312,
+            "ooo_bypass": 7,
+            "clock_hz": 100000000,
+            "cpi": 1.257771,
+            "ipc": 0.795057
+          },
+          {
+            "benchmark": "teaching_array_sum64",
+            "cycles": 741,
+            "instructions": 324,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 15,
+            "clock_hz": 100000000,
+            "cpi": 2.287037,
+            "ipc": 0.437247
+          },
+          {
+            "benchmark": "teaching_branch_predict64",
+            "cycles": 480,
+            "instructions": 293,
+            "dmem_reads": 0,
+            "dmem_writes": 0,
+            "branches": 128,
+            "mispredicts": 66,
+            "ooo_bypass": 0,
+            "clock_hz": 100000000,
+            "cpi": 1.638225,
+            "ipc": 0.610417
+          },
+          {
+            "benchmark": "teaching_ooo_overlap64",
+            "cycles": 1583,
+            "instructions": 516,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 16,
+            "clock_hz": 100000000,
+            "cpi": 3.067829,
+            "ipc": 0.325963
+          }
+        ]
+      },
+      "teacher_reports": [
+        {
+          "artifact": "tester-01/test_report.json",
+          "sha256": "21ef3fe6172096b3755a8c8887f3ceb4b6e8f703a3045d06880729b506a0b4b0",
+          "passed": false,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=0|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=-1|expected=3|features=7",
+            "LAB_RESULT: FAIL (3 failures / 127737 checks)"
+          ],
+          "first_deviation": "AI_EDA_TRACE|cycle=417|test=t02_alu_r|event=check_reg|halted=1|exit_code=66|detail=x8_exp=0x03000000_got=0x00000006_FAIL",
+          "synthesis_error": null
+        },
+        {
+          "artifact": "tester-02/test_report.json",
+          "sha256": "0708296cce2e29bf515c9b6fe738c7a4559a880605209ac2e2f6647093fa62a8",
+          "passed": false,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=0|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=-1|expected=3|features=7",
+            "LAB_RESULT: FAIL (2 failures / 127737 checks)"
+          ],
+          "first_deviation": "AI_EDA_TRACE|cycle=418|test=t02_alu_r|event=check_reg|halted=1|exit_code=66|detail=x9_exp=0x1fffffff_got=0x3ffffffe_FAIL",
+          "synthesis_error": null
+        },
+        {
+          "artifact": "tester-03/test_report.json",
+          "sha256": "ffa4e7a0636e3f8862fca7c783c9409abd87fcce975f1370a2c3e9aa77449c33",
+          "passed": false,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=0|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=-1|expected=3|features=7",
+            "LAB_RESULT: FAIL (3 failures / 127737 checks)"
+          ],
+          "first_deviation": "AI_EDA_TRACE|cycle=417|test=t02_alu_r|event=check_reg|halted=1|exit_code=66|detail=x8_exp=0x03000000_got=0x00000006_FAIL",
+          "synthesis_error": null
+        },
+        {
+          "artifact": "tester-04/test_report.json",
+          "sha256": "682db6dfd4f0d2d7babfeab9577054325c7de197a5957f3ff120f40277a63e56",
+          "passed": false,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=0|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=-1|expected=3|features=7",
+            "LAB_RESULT: FAIL (2 failures / 127737 checks)"
+          ],
+          "first_deviation": "AI_EDA_TRACE|cycle=418|test=t02_alu_r|event=check_reg|halted=1|exit_code=66|detail=x9_exp=0x1fffffff_got=0x3ffffffe_FAIL",
+          "synthesis_error": null
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T143808644969",
+      "project_id": "rv32i5_ooo",
+      "status": "passed",
+      "created_at": "2026-11-09T14:38:08.645+00:00",
+      "finished_at": "2026-11-09T14:38:16.424+00:00",
+      "workflow": "RV32I L3 Hybrid EDA Agent",
+      "duration_ms": 7779,
+      "tester_attempts": 1,
+      "model_calls": [
+        {
+          "step": 4,
+          "node_id": "coder",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 2400,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 497,
+            "completion_tokens": 1219,
+            "total_tokens": 1716
+          },
+          "duration_ms": 5698,
+          "finish_reason": "stop"
+        }
+      ],
+      "api_total_tokens": 1716,
+      "known_api_tokens": 1716,
+      "calls_missing_usage": 0,
+      "teacher_passed": true,
+      "cpu_capability": {
+        "level": 3,
+        "name": "rv32i",
+        "declared": 3,
+        "verified": 3,
+        "expected": 3,
+        "features": 7,
+        "declared_level": 3,
+        "verified_level": 3,
+        "expected_level": 3
+      },
+      "metrics": {
+        "status": "failed",
+        "reason": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T143808644969/artifacts/generated_attempt1.sv:725: ERROR: syntax error, unexpected TOK_GENVAR, expecting TOK_ID or '{'"
+      },
+      "performance": {
+        "benchmarks": [
+          {
+            "benchmark": "trained_branch64",
+            "cycles": 148,
+            "instructions": 132,
+            "branches": 64,
+            "mispredicts": 2,
+            "cpi": 1.121212,
+            "ipc": 0.891892
+          },
+          {
+            "benchmark": "teaching_crc32_64bytes",
+            "cycles": 4006,
+            "instructions": 3185,
+            "dmem_reads": 16,
+            "dmem_writes": 0,
+            "branches": 1088,
+            "mispredicts": 312,
+            "ooo_bypass": 7,
+            "clock_hz": 100000000,
+            "cpi": 1.257771,
+            "ipc": 0.795057
+          },
+          {
+            "benchmark": "teaching_array_sum64",
+            "cycles": 741,
+            "instructions": 324,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 15,
+            "clock_hz": 100000000,
+            "cpi": 2.287037,
+            "ipc": 0.437247
+          },
+          {
+            "benchmark": "teaching_branch_predict64",
+            "cycles": 480,
+            "instructions": 293,
+            "dmem_reads": 0,
+            "dmem_writes": 0,
+            "branches": 128,
+            "mispredicts": 66,
+            "ooo_bypass": 0,
+            "clock_hz": 100000000,
+            "cpi": 1.638225,
+            "ipc": 0.610417
+          },
+          {
+            "benchmark": "teaching_ooo_overlap64",
+            "cycles": 1583,
+            "instructions": 516,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 16,
+            "clock_hz": 100000000,
+            "cpi": 3.067829,
+            "ipc": 0.325963
+          }
+        ]
+      },
+      "teacher_reports": [
+        {
+          "artifact": "tester-01/test_report.json",
+          "sha256": "d3f0534a90af5b09b156cad1f367aa7b59681a407d4ac2cfe366f99c615260eb",
+          "passed": true,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=1|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=3|expected=3|features=7",
+            "LAB_RESULT: PASS (21 tests, 127737 checks)"
+          ],
+          "first_deviation": null,
+          "synthesis_error": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T143808644969/artifacts/generated_attempt1.sv:725: ERROR: syntax error, unexpected TOK_GENVAR, expecting TOK_ID or '{'"
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T143816811460",
+      "project_id": "rv32i5_ooo",
+      "status": "passed",
+      "created_at": "2026-11-09T14:38:16.811+00:00",
+      "finished_at": "2026-11-09T14:38:30.786+00:00",
+      "workflow": "RV32I L3 Hybrid EDA Agent",
+      "duration_ms": 13975,
+      "tester_attempts": 1,
+      "model_calls": [
+        {
+          "step": 4,
+          "node_id": "coder",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 2400,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 497,
+            "completion_tokens": 1604,
+            "total_tokens": 2101
+          },
+          "duration_ms": 11808,
+          "finish_reason": "stop"
+        }
+      ],
+      "api_total_tokens": 2101,
+      "known_api_tokens": 2101,
+      "calls_missing_usage": 0,
+      "teacher_passed": true,
+      "cpu_capability": {
+        "level": 3,
+        "name": "rv32i",
+        "declared": 3,
+        "verified": 3,
+        "expected": 3,
+        "features": 7,
+        "declared_level": 3,
+        "verified_level": 3,
+        "expected_level": 3
+      },
+      "metrics": {
+        "status": "failed",
+        "reason": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T143816811460/artifacts/generated_attempt1.sv:725: ERROR: syntax error, unexpected TOK_GENVAR, expecting TOK_ID or '{'"
+      },
+      "performance": {
+        "benchmarks": [
+          {
+            "benchmark": "trained_branch64",
+            "cycles": 148,
+            "instructions": 132,
+            "branches": 64,
+            "mispredicts": 2,
+            "cpi": 1.121212,
+            "ipc": 0.891892
+          },
+          {
+            "benchmark": "teaching_crc32_64bytes",
+            "cycles": 4006,
+            "instructions": 3185,
+            "dmem_reads": 16,
+            "dmem_writes": 0,
+            "branches": 1088,
+            "mispredicts": 312,
+            "ooo_bypass": 7,
+            "clock_hz": 100000000,
+            "cpi": 1.257771,
+            "ipc": 0.795057
+          },
+          {
+            "benchmark": "teaching_array_sum64",
+            "cycles": 741,
+            "instructions": 324,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 15,
+            "clock_hz": 100000000,
+            "cpi": 2.287037,
+            "ipc": 0.437247
+          },
+          {
+            "benchmark": "teaching_branch_predict64",
+            "cycles": 480,
+            "instructions": 293,
+            "dmem_reads": 0,
+            "dmem_writes": 0,
+            "branches": 128,
+            "mispredicts": 66,
+            "ooo_bypass": 0,
+            "clock_hz": 100000000,
+            "cpi": 1.638225,
+            "ipc": 0.610417
+          },
+          {
+            "benchmark": "teaching_ooo_overlap64",
+            "cycles": 1583,
+            "instructions": 516,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 16,
+            "clock_hz": 100000000,
+            "cpi": 3.067829,
+            "ipc": 0.325963
+          }
+        ]
+      },
+      "teacher_reports": [
+        {
+          "artifact": "tester-01/test_report.json",
+          "sha256": "3dbb5bdf021074fe14346f93ff5211d01bc97b91ba0ce32cddcfcee21e637d7f",
+          "passed": true,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=1|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=3|expected=3|features=7",
+            "LAB_RESULT: PASS (21 tests, 127737 checks)"
+          ],
+          "first_deviation": null,
+          "synthesis_error": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T143816811460/artifacts/generated_attempt1.sv:725: ERROR: syntax error, unexpected TOK_GENVAR, expecting TOK_ID or '{'"
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T143831249410",
+      "project_id": "rv32i5_ooo",
+      "status": "passed",
+      "created_at": "2026-11-09T14:38:31.250+00:00",
+      "finished_at": "2026-11-09T14:38:44.748+00:00",
+      "workflow": "RV32I L3 Hybrid EDA Agent",
+      "duration_ms": 10566,
+      "tester_attempts": 1,
+      "model_calls": [
+        {
+          "step": 4,
+          "node_id": "coder",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 2400,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 497,
+            "completion_tokens": 1946,
+            "total_tokens": 2443
+          },
+          "duration_ms": 8355,
+          "finish_reason": "stop"
+        }
+      ],
+      "api_total_tokens": 2443,
+      "known_api_tokens": 2443,
+      "calls_missing_usage": 0,
+      "teacher_passed": true,
+      "cpu_capability": {
+        "level": 3,
+        "name": "rv32i",
+        "declared": 3,
+        "verified": 3,
+        "expected": 3,
+        "features": 7,
+        "declared_level": 3,
+        "verified_level": 3,
+        "expected_level": 3
+      },
+      "metrics": {
+        "status": "failed",
+        "reason": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T143831249410/artifacts/generated_attempt1.sv:725: ERROR: syntax error, unexpected TOK_GENVAR, expecting TOK_ID or '{'"
+      },
+      "performance": {
+        "benchmarks": [
+          {
+            "benchmark": "trained_branch64",
+            "cycles": 148,
+            "instructions": 132,
+            "branches": 64,
+            "mispredicts": 2,
+            "cpi": 1.121212,
+            "ipc": 0.891892
+          },
+          {
+            "benchmark": "teaching_crc32_64bytes",
+            "cycles": 4158,
+            "instructions": 3185,
+            "dmem_reads": 16,
+            "dmem_writes": 0,
+            "branches": 1088,
+            "mispredicts": 388,
+            "ooo_bypass": 7,
+            "clock_hz": 100000000,
+            "cpi": 1.305495,
+            "ipc": 0.765993
+          },
+          {
+            "benchmark": "teaching_array_sum64",
+            "cycles": 741,
+            "instructions": 324,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 15,
+            "clock_hz": 100000000,
+            "cpi": 2.287037,
+            "ipc": 0.437247
+          },
+          {
+            "benchmark": "teaching_branch_predict64",
+            "cycles": 480,
+            "instructions": 293,
+            "dmem_reads": 0,
+            "dmem_writes": 0,
+            "branches": 128,
+            "mispredicts": 66,
+            "ooo_bypass": 0,
+            "clock_hz": 100000000,
+            "cpi": 1.638225,
+            "ipc": 0.610417
+          },
+          {
+            "benchmark": "teaching_ooo_overlap64",
+            "cycles": 1583,
+            "instructions": 516,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 16,
+            "clock_hz": 100000000,
+            "cpi": 3.067829,
+            "ipc": 0.325963
+          }
+        ]
+      },
+      "teacher_reports": [
+        {
+          "artifact": "tester-01/test_report.json",
+          "sha256": "61db0b1b575b6ce301fc1d8ab000ed27415b703cb2c63ca21557c7307f6e495f",
+          "passed": true,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=1|skipped=0|checks=107114",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20908",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=3|expected=3|features=7",
+            "LAB_RESULT: PASS (21 tests, 130569 checks)"
+          ],
+          "first_deviation": null,
+          "synthesis_error": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T143831249410/artifacts/generated_attempt1.sv:725: ERROR: syntax error, unexpected TOK_GENVAR, expecting TOK_ID or '{'"
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T143907564252",
+      "project_id": "rv32i5_ooo",
+      "status": "passed",
+      "created_at": "2026-11-09T14:39:07.565+00:00",
+      "finished_at": "2026-11-09T14:39:10.023+00:00",
+      "workflow": "RV32I L3 Hybrid EDA Agent",
+      "duration_ms": 2458,
+      "tester_attempts": 1,
+      "model_calls": [],
+      "api_total_tokens": 0,
+      "known_api_tokens": 0,
+      "calls_missing_usage": 0,
+      "teacher_passed": true,
+      "cpu_capability": {
+        "level": 3,
+        "name": "rv32i",
+        "declared": 3,
+        "verified": 3,
+        "expected": 3,
+        "features": 7,
+        "declared_level": 3,
+        "verified_level": 3,
+        "expected_level": 3
+      },
+      "metrics": {
+        "status": "failed",
+        "reason": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T143907564252/artifacts/generated_attempt1.sv:643: ERROR: Unsupported expression on dynamic range select on signal `\\ready'!"
+      },
+      "performance": {
+        "benchmarks": [
+          {
+            "benchmark": "trained_branch64",
+            "cycles": 148,
+            "instructions": 132,
+            "branches": 64,
+            "mispredicts": 2,
+            "cpi": 1.121212,
+            "ipc": 0.891892
+          },
+          {
+            "benchmark": "teaching_crc32_64bytes",
+            "cycles": 4006,
+            "instructions": 3185,
+            "dmem_reads": 16,
+            "dmem_writes": 0,
+            "branches": 1088,
+            "mispredicts": 312,
+            "ooo_bypass": 7,
+            "clock_hz": 100000000,
+            "cpi": 1.257771,
+            "ipc": 0.795057
+          },
+          {
+            "benchmark": "teaching_array_sum64",
+            "cycles": 741,
+            "instructions": 324,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 15,
+            "clock_hz": 100000000,
+            "cpi": 2.287037,
+            "ipc": 0.437247
+          },
+          {
+            "benchmark": "teaching_branch_predict64",
+            "cycles": 480,
+            "instructions": 293,
+            "dmem_reads": 0,
+            "dmem_writes": 0,
+            "branches": 128,
+            "mispredicts": 66,
+            "ooo_bypass": 0,
+            "clock_hz": 100000000,
+            "cpi": 1.638225,
+            "ipc": 0.610417
+          },
+          {
+            "benchmark": "teaching_ooo_overlap64",
+            "cycles": 1583,
+            "instructions": 516,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 16,
+            "clock_hz": 100000000,
+            "cpi": 3.067829,
+            "ipc": 0.325963
+          }
+        ]
+      },
+      "teacher_reports": [
+        {
+          "artifact": "tester-01/test_report.json",
+          "sha256": "adba503a2985922bc611d313de2815dee5a03a9594666ea1d5f7100cf066ba5e",
+          "passed": true,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=1|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=3|expected=3|features=7",
+            "LAB_RESULT: PASS (21 tests, 127737 checks)"
+          ],
+          "first_deviation": null,
+          "synthesis_error": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T143907564252/artifacts/generated_attempt1.sv:643: ERROR: Unsupported expression on dynamic range select on signal `\\ready'!"
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T144140760471",
+      "project_id": "rv32i5_ooo",
+      "status": "passed",
+      "created_at": "2026-11-09T14:41:40.761+00:00",
+      "finished_at": "2026-11-09T14:41:43.277+00:00",
+      "workflow": "RV32I L3 Hybrid EDA Agent",
+      "duration_ms": 2517,
+      "tester_attempts": 1,
+      "model_calls": [],
+      "api_total_tokens": 0,
+      "known_api_tokens": 0,
+      "calls_missing_usage": 0,
+      "teacher_passed": true,
+      "cpu_capability": {
+        "level": 3,
+        "name": "rv32i",
+        "declared": 3,
+        "verified": 3,
+        "expected": 3,
+        "features": 7,
+        "declared_level": 3,
+        "verified_level": 3,
+        "expected_level": 3
+      },
+      "metrics": {
+        "status": "failed",
+        "reason": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T144140760471/artifacts/generated_attempt1.sv:650: ERROR: Unsupported expression on dynamic range select on signal `\\ready'!"
+      },
+      "performance": {
+        "benchmarks": [
+          {
+            "benchmark": "trained_branch64",
+            "cycles": 148,
+            "instructions": 132,
+            "branches": 64,
+            "mispredicts": 2,
+            "cpi": 1.121212,
+            "ipc": 0.891892
+          },
+          {
+            "benchmark": "teaching_crc32_64bytes",
+            "cycles": 4006,
+            "instructions": 3185,
+            "dmem_reads": 16,
+            "dmem_writes": 0,
+            "branches": 1088,
+            "mispredicts": 312,
+            "ooo_bypass": 7,
+            "clock_hz": 100000000,
+            "cpi": 1.257771,
+            "ipc": 0.795057
+          },
+          {
+            "benchmark": "teaching_array_sum64",
+            "cycles": 741,
+            "instructions": 324,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 15,
+            "clock_hz": 100000000,
+            "cpi": 2.287037,
+            "ipc": 0.437247
+          },
+          {
+            "benchmark": "teaching_branch_predict64",
+            "cycles": 480,
+            "instructions": 293,
+            "dmem_reads": 0,
+            "dmem_writes": 0,
+            "branches": 128,
+            "mispredicts": 66,
+            "ooo_bypass": 0,
+            "clock_hz": 100000000,
+            "cpi": 1.638225,
+            "ipc": 0.610417
+          },
+          {
+            "benchmark": "teaching_ooo_overlap64",
+            "cycles": 1583,
+            "instructions": 516,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 16,
+            "clock_hz": 100000000,
+            "cpi": 3.067829,
+            "ipc": 0.325963
+          }
+        ]
+      },
+      "teacher_reports": [
+        {
+          "artifact": "tester-01/test_report.json",
+          "sha256": "faaa3d98493811bf2ec09713cd93aec27c7328d79838783dbc34d9546797ac99",
+          "passed": true,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=1|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=3|expected=3|features=7",
+            "LAB_RESULT: PASS (21 tests, 127737 checks)"
+          ],
+          "first_deviation": null,
+          "synthesis_error": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T144140760471/artifacts/generated_attempt1.sv:650: ERROR: Unsupported expression on dynamic range select on signal `\\ready'!"
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T144140760529",
+      "project_id": "rv32i5_ooo",
+      "status": "failed",
+      "created_at": "2026-11-09T14:41:40.761+00:00",
+      "finished_at": "2026-11-09T14:43:07.278+00:00",
+      "workflow": "EDA Auto-Design Agent",
+      "duration_ms": 80654,
+      "tester_attempts": 0,
+      "model_calls": [
+        {
+          "step": 1,
+          "node_id": "parser",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 8192,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 13644,
+            "completion_tokens": 1358,
+            "total_tokens": 15002
+          },
+          "duration_ms": 10050,
+          "finish_reason": "stop"
+        },
+        {
+          "step": 2,
+          "node_id": "planner",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 8192,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 14736,
+            "completion_tokens": 3731,
+            "total_tokens": 18467
+          },
+          "duration_ms": 20598,
+          "finish_reason": "stop"
+        },
+        {
+          "step": 3,
+          "node_id": "coder",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 8192,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 19270,
+            "completion_tokens": 7765,
+            "total_tokens": 27035
+          },
+          "duration_ms": 32786,
+          "finish_reason": "stop"
+        },
+        {
+          "step": 4,
+          "node_id": "coder",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 8192,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 19122,
+            "completion_tokens": 1214,
+            "total_tokens": 20336
+          },
+          "duration_ms": 6464,
+          "finish_reason": "stop"
+        },
+        {
+          "step": 5,
+          "node_id": "coder",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 8192,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 19189,
+            "completion_tokens": 2332,
+            "total_tokens": 21521
+          },
+          "duration_ms": 10659,
+          "finish_reason": "stop"
+        }
+      ],
+      "api_total_tokens": 102361,
+      "known_api_tokens": 102361,
+      "calls_missing_usage": 0,
+      "teacher_passed": null,
+      "cpu_capability": null,
+      "metrics": null,
+      "performance": null
+    },
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T144141199897",
+      "project_id": "rv32i5_ooo",
+      "status": "passed",
+      "created_at": "2026-11-09T14:41:41.231+00:00",
+      "finished_at": "2026-11-09T14:41:52.103+00:00",
+      "workflow": "RV32I L3 Hybrid EDA Agent",
+      "duration_ms": 10873,
+      "tester_attempts": 2,
+      "model_calls": [
+        {
+          "step": 2,
+          "node_id": "diagnoser",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 600,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 1189,
+            "completion_tokens": 269,
+            "total_tokens": 1458
+          },
+          "duration_ms": 5083,
+          "finish_reason": "stop"
+        },
+        {
+          "step": 3,
+          "node_id": "patch",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 1800,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 5864,
+            "completion_tokens": 158,
+            "total_tokens": 6022
+          },
+          "duration_ms": 1306,
+          "finish_reason": "stop"
+        }
+      ],
+      "api_total_tokens": 7480,
+      "known_api_tokens": 7480,
+      "calls_missing_usage": 0,
+      "teacher_passed": true,
+      "cpu_capability": {
+        "level": 3,
+        "name": "rv32i",
+        "declared": 3,
+        "verified": 3,
+        "expected": 3,
+        "features": 7,
+        "declared_level": 3,
+        "verified_level": 3,
+        "expected_level": 3
+      },
+      "metrics": {
+        "status": "failed",
+        "reason": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T144141199897/artifacts/generated_attempt2.sv:518: ERROR: Unsupported expression on dynamic range select on signal `\\ready'!"
+      },
+      "performance": {
+        "benchmarks": [
+          {
+            "benchmark": "trained_branch64",
+            "cycles": 148,
+            "instructions": 132,
+            "branches": 64,
+            "mispredicts": 2,
+            "cpi": 1.121212,
+            "ipc": 0.891892
+          },
+          {
+            "benchmark": "teaching_crc32_64bytes",
+            "cycles": 4006,
+            "instructions": 3185,
+            "dmem_reads": 16,
+            "dmem_writes": 0,
+            "branches": 1088,
+            "mispredicts": 312,
+            "ooo_bypass": 7,
+            "clock_hz": 100000000,
+            "cpi": 1.257771,
+            "ipc": 0.795057
+          },
+          {
+            "benchmark": "teaching_array_sum64",
+            "cycles": 741,
+            "instructions": 324,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 15,
+            "clock_hz": 100000000,
+            "cpi": 2.287037,
+            "ipc": 0.437247
+          },
+          {
+            "benchmark": "teaching_branch_predict64",
+            "cycles": 480,
+            "instructions": 293,
+            "dmem_reads": 0,
+            "dmem_writes": 0,
+            "branches": 128,
+            "mispredicts": 66,
+            "ooo_bypass": 0,
+            "clock_hz": 100000000,
+            "cpi": 1.638225,
+            "ipc": 0.610417
+          },
+          {
+            "benchmark": "teaching_ooo_overlap64",
+            "cycles": 1583,
+            "instructions": 516,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 16,
+            "clock_hz": 100000000,
+            "cpi": 3.067829,
+            "ipc": 0.325963
+          }
+        ]
+      },
+      "teacher_reports": [
+        {
+          "artifact": "tester-01/test_report.json",
+          "sha256": "9d72f911af54fe6d8c76bd351d92acc3f3263e3bd5432d4dedf8eca906c8d84b",
+          "passed": false,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=0|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=-1|expected=3|features=7",
+            "LAB_RESULT: FAIL (3 failures / 127737 checks)"
+          ],
+          "first_deviation": "AI_EDA_TRACE|cycle=417|test=t02_alu_r|event=check_reg|halted=1|exit_code=66|detail=x8_exp=0x03000000_got=0x00000006_FAIL",
+          "synthesis_error": null
+        },
+        {
+          "artifact": "tester-02/test_report.json",
+          "sha256": "4f1a2c938ece5c6ae7d265ddd8a7320397dda69c9a0c6951e55a8007cb0abce1",
+          "passed": true,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=1|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=3|expected=3|features=7",
+            "LAB_RESULT: PASS (21 tests, 127737 checks)"
+          ],
+          "first_deviation": null,
+          "synthesis_error": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T144141199897/artifacts/generated_attempt2.sv:518: ERROR: Unsupported expression on dynamic range select on signal `\\ready'!"
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T144256947324",
+      "project_id": "rv32i5_ooo",
+      "status": "passed",
+      "created_at": "2026-11-09T14:42:56.947+00:00",
+      "finished_at": "2026-11-09T14:43:00.101+00:00",
+      "workflow": "RV32I L3 Hybrid EDA Agent",
+      "duration_ms": 3153,
+      "tester_attempts": 1,
+      "model_calls": [],
+      "api_total_tokens": 0,
+      "known_api_tokens": 0,
+      "calls_missing_usage": 0,
+      "teacher_passed": true,
+      "cpu_capability": {
+        "level": 3,
+        "name": "rv32i",
+        "declared": 3,
+        "verified": 3,
+        "expected": 3,
+        "features": 7,
+        "declared_level": 3,
+        "verified_level": 3,
+        "expected_level": 3
+      },
+      "metrics": {
+        "status": "failed",
+        "reason": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T144256947324/artifacts/generated_attempt1.sv:656: ERROR: Unsupported expression on dynamic range select on signal `\\ready'!"
+      },
+      "performance": {
+        "benchmarks": [
+          {
+            "benchmark": "trained_branch64",
+            "cycles": 148,
+            "instructions": 132,
+            "branches": 64,
+            "mispredicts": 2,
+            "cpi": 1.121212,
+            "ipc": 0.891892
+          },
+          {
+            "benchmark": "teaching_crc32_64bytes",
+            "cycles": 4006,
+            "instructions": 3185,
+            "dmem_reads": 16,
+            "dmem_writes": 0,
+            "branches": 1088,
+            "mispredicts": 312,
+            "ooo_bypass": 7,
+            "clock_hz": 100000000,
+            "cpi": 1.257771,
+            "ipc": 0.795057
+          },
+          {
+            "benchmark": "teaching_array_sum64",
+            "cycles": 741,
+            "instructions": 324,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 15,
+            "clock_hz": 100000000,
+            "cpi": 2.287037,
+            "ipc": 0.437247
+          },
+          {
+            "benchmark": "teaching_branch_predict64",
+            "cycles": 480,
+            "instructions": 293,
+            "dmem_reads": 0,
+            "dmem_writes": 0,
+            "branches": 128,
+            "mispredicts": 66,
+            "ooo_bypass": 0,
+            "clock_hz": 100000000,
+            "cpi": 1.638225,
+            "ipc": 0.610417
+          },
+          {
+            "benchmark": "teaching_ooo_overlap64",
+            "cycles": 1583,
+            "instructions": 516,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 16,
+            "clock_hz": 100000000,
+            "cpi": 3.067829,
+            "ipc": 0.325963
+          }
+        ]
+      },
+      "teacher_reports": [
+        {
+          "artifact": "tester-01/test_report.json",
+          "sha256": "182b92f71397d37f51b146a7228641bbf23eb149e0a63ecb76e6f908dae0d299",
+          "passed": true,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=1|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=3|expected=3|features=7",
+            "LAB_RESULT: PASS (21 tests, 127737 checks)"
+          ],
+          "first_deviation": null,
+          "synthesis_error": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T144256947324/artifacts/generated_attempt1.sv:656: ERROR: Unsupported expression on dynamic range select on signal `\\ready'!"
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T144446041958",
+      "project_id": "rv32i5_ooo",
+      "status": "passed",
+      "created_at": "2026-11-09T14:44:46.043+00:00",
+      "finished_at": "2026-11-09T14:46:38.811+00:00",
+      "workflow": "RV32I L3 Hybrid EDA Agent",
+      "duration_ms": 103975,
+      "tester_attempts": 1,
+      "model_calls": [],
+      "api_total_tokens": 0,
+      "known_api_tokens": 0,
+      "calls_missing_usage": 0,
+      "teacher_passed": true,
+      "cpu_capability": {
+        "level": 3,
+        "name": "rv32i",
+        "declared": 3,
+        "verified": 3,
+        "expected": 3,
+        "features": 7,
+        "declared_level": 3,
+        "verified_level": 3,
+        "expected_level": 3
+      },
+      "metrics": {
+        "status": "ok",
+        "library": "gscl45nm.lib",
+        "top_module": "rv32i5",
+        "area": 252219.6534,
+        "area_unit": "library area units (gscl45nm)",
+        "power_status": "ok",
+        "power_reason": null,
+        "power_method": "OpenSTA gate-level VCD estimate",
+        "internal_power_w": 0.0253,
+        "switching_power_w": 0.00267,
+        "dynamic_power_w": 0.02797,
+        "leakage_power_w": 0.00119,
+        "total_power_w": 0.0292,
+        "vcd_scope": "tb_power_agent_rv32i5/dut"
+      },
+      "performance": {
+        "benchmarks": [
+          {
+            "benchmark": "trained_branch64",
+            "cycles": 148,
+            "instructions": 132,
+            "branches": 64,
+            "mispredicts": 2,
+            "cpi": 1.121212,
+            "ipc": 0.891892
+          },
+          {
+            "benchmark": "teaching_crc32_64bytes",
+            "cycles": 4006,
+            "instructions": 3185,
+            "dmem_reads": 16,
+            "dmem_writes": 0,
+            "branches": 1088,
+            "mispredicts": 312,
+            "ooo_bypass": 7,
+            "clock_hz": 100000000,
+            "cpi": 1.257771,
+            "ipc": 0.795057
+          },
+          {
+            "benchmark": "teaching_array_sum64",
+            "cycles": 741,
+            "instructions": 324,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 15,
+            "clock_hz": 100000000,
+            "cpi": 2.287037,
+            "ipc": 0.437247
+          },
+          {
+            "benchmark": "teaching_branch_predict64",
+            "cycles": 480,
+            "instructions": 293,
+            "dmem_reads": 0,
+            "dmem_writes": 0,
+            "branches": 128,
+            "mispredicts": 66,
+            "ooo_bypass": 0,
+            "clock_hz": 100000000,
+            "cpi": 1.638225,
+            "ipc": 0.610417
+          },
+          {
+            "benchmark": "teaching_ooo_overlap64",
+            "cycles": 1583,
+            "instructions": 516,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 16,
+            "clock_hz": 100000000,
+            "cpi": 3.067829,
+            "ipc": 0.325963
+          }
+        ]
+      },
+      "teacher_reports": [
+        {
+          "artifact": "tester-01/test_report.json",
+          "sha256": "f4cf9635e9fb6ce629ea1df9ee94e5d725b6ee9c48496f419edc6471a7058eb7",
+          "passed": true,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=1|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=3|expected=3|features=7",
+            "LAB_RESULT: PASS (21 tests, 127737 checks)"
+          ],
+          "first_deviation": null,
+          "synthesis_error": null
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T144501021286",
+      "project_id": "rv32i5_ooo",
+      "status": "passed",
+      "created_at": "2026-11-09T14:45:01.021+00:00",
+      "finished_at": "2026-11-09T14:45:20.950+00:00",
+      "workflow": "EDA Auto-Design Agent",
+      "duration_ms": 16998,
+      "tester_attempts": 1,
+      "model_calls": [
+        {
+          "step": 1,
+          "node_id": "modifier",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 2400,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 31501,
+            "completion_tokens": 2088,
+            "total_tokens": 33589
+          },
+          "duration_ms": 14932,
+          "finish_reason": "stop"
+        }
+      ],
+      "api_total_tokens": 33589,
+      "known_api_tokens": 33589,
+      "calls_missing_usage": 0,
+      "teacher_passed": true,
+      "cpu_capability": {
+        "level": 3,
+        "name": "rv32i",
+        "declared": 3,
+        "verified": 3,
+        "expected": 3,
+        "features": 7,
+        "declared_level": 3,
+        "verified_level": 3,
+        "expected_level": 3
+      },
+      "metrics": {
+        "status": "failed",
+        "reason": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T144501021286/artifacts/generated_attempt2.sv:521: ERROR: Unsupported expression on dynamic range select on signal `\\ready'!"
+      },
+      "performance": {
+        "benchmarks": [
+          {
+            "benchmark": "trained_branch64",
+            "cycles": 148,
+            "instructions": 132,
+            "branches": 64,
+            "mispredicts": 2,
+            "cpi": 1.121212,
+            "ipc": 0.891892
+          },
+          {
+            "benchmark": "teaching_crc32_64bytes",
+            "cycles": 4006,
+            "instructions": 3185,
+            "dmem_reads": 16,
+            "dmem_writes": 0,
+            "branches": 1088,
+            "mispredicts": 312,
+            "ooo_bypass": 7,
+            "clock_hz": 100000000,
+            "cpi": 1.257771,
+            "ipc": 0.795057
+          },
+          {
+            "benchmark": "teaching_array_sum64",
+            "cycles": 741,
+            "instructions": 324,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 15,
+            "clock_hz": 100000000,
+            "cpi": 2.287037,
+            "ipc": 0.437247
+          },
+          {
+            "benchmark": "teaching_branch_predict64",
+            "cycles": 480,
+            "instructions": 293,
+            "dmem_reads": 0,
+            "dmem_writes": 0,
+            "branches": 128,
+            "mispredicts": 66,
+            "ooo_bypass": 0,
+            "clock_hz": 100000000,
+            "cpi": 1.638225,
+            "ipc": 0.610417
+          },
+          {
+            "benchmark": "teaching_ooo_overlap64",
+            "cycles": 1583,
+            "instructions": 516,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 16,
+            "clock_hz": 100000000,
+            "cpi": 3.067829,
+            "ipc": 0.325963
+          }
+        ]
+      },
+      "teacher_reports": [
+        {
+          "artifact": "tester-02/test_report.json",
+          "sha256": "b096b31d4759cb2443304bb0b1f982ea0e35b5663cf499e0a38cd18656bc9500",
+          "passed": true,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=1|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=3|expected=3|features=7",
+            "LAB_RESULT: PASS (21 tests, 127737 checks)"
+          ],
+          "first_deviation": null,
+          "synthesis_error": "/home/yikai/projects/THU_AI_EDA_2026/runs/agent/agent-20261109T144501021286/artifacts/generated_attempt2.sv:521: ERROR: Unsupported expression on dynamic range select on signal `\\ready'!"
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T144522544071",
+      "project_id": "rv32i5_ooo",
+      "status": "passed",
+      "created_at": "2026-11-09T14:45:22.544+00:00",
+      "finished_at": "2026-11-09T14:47:21.220+00:00",
+      "workflow": "RV32I L3 Hybrid EDA Agent",
+      "duration_ms": 109899,
+      "tester_attempts": 1,
+      "model_calls": [
+        {
+          "step": 4,
+          "node_id": "coder",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 2400,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 497,
+            "completion_tokens": 1637,
+            "total_tokens": 2134
+          },
+          "duration_ms": 9841,
+          "finish_reason": "stop"
+        }
+      ],
+      "api_total_tokens": 2134,
+      "known_api_tokens": 2134,
+      "calls_missing_usage": 0,
+      "teacher_passed": true,
+      "cpu_capability": {
+        "level": 3,
+        "name": "rv32i",
+        "declared": 3,
+        "verified": 3,
+        "expected": 3,
+        "features": 7,
+        "declared_level": 3,
+        "verified_level": 3,
+        "expected_level": 3
+      },
+      "metrics": {
+        "status": "ok",
+        "library": "gscl45nm.lib",
+        "top_module": "rv32i5",
+        "area": 252190.5568,
+        "area_unit": "library area units (gscl45nm)",
+        "power_status": "ok",
+        "power_reason": null,
+        "power_method": "OpenSTA gate-level VCD estimate",
+        "internal_power_w": 0.0253,
+        "switching_power_w": 0.00267,
+        "dynamic_power_w": 0.02797,
+        "leakage_power_w": 0.00119,
+        "total_power_w": 0.0292,
+        "vcd_scope": "tb_power_agent_rv32i5/dut"
+      },
+      "performance": {
+        "benchmarks": [
+          {
+            "benchmark": "trained_branch64",
+            "cycles": 148,
+            "instructions": 132,
+            "branches": 64,
+            "mispredicts": 2,
+            "cpi": 1.121212,
+            "ipc": 0.891892
+          },
+          {
+            "benchmark": "teaching_crc32_64bytes",
+            "cycles": 4006,
+            "instructions": 3185,
+            "dmem_reads": 16,
+            "dmem_writes": 0,
+            "branches": 1088,
+            "mispredicts": 312,
+            "ooo_bypass": 7,
+            "clock_hz": 100000000,
+            "cpi": 1.257771,
+            "ipc": 0.795057
+          },
+          {
+            "benchmark": "teaching_array_sum64",
+            "cycles": 741,
+            "instructions": 324,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 15,
+            "clock_hz": 100000000,
+            "cpi": 2.287037,
+            "ipc": 0.437247
+          },
+          {
+            "benchmark": "teaching_branch_predict64",
+            "cycles": 480,
+            "instructions": 293,
+            "dmem_reads": 0,
+            "dmem_writes": 0,
+            "branches": 128,
+            "mispredicts": 66,
+            "ooo_bypass": 0,
+            "clock_hz": 100000000,
+            "cpi": 1.638225,
+            "ipc": 0.610417
+          },
+          {
+            "benchmark": "teaching_ooo_overlap64",
+            "cycles": 1583,
+            "instructions": 516,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 16,
+            "clock_hz": 100000000,
+            "cpi": 3.067829,
+            "ipc": 0.325963
+          }
+        ]
+      },
+      "teacher_reports": [
+        {
+          "artifact": "tester-01/test_report.json",
+          "sha256": "6f0587c8fa0cdf0156dfb49cf1a193d5e0216e1812f80940cb0a36be765db796",
+          "passed": true,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=1|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=3|expected=3|features=7",
+            "LAB_RESULT: PASS (21 tests, 127737 checks)"
+          ],
+          "first_deviation": null,
+          "synthesis_error": null
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T144721585590",
+      "project_id": "rv32i5_ooo",
+      "status": "passed",
+      "created_at": "2026-11-09T14:47:21.585+00:00",
+      "finished_at": "2026-11-09T14:49:25.733+00:00",
+      "workflow": "RV32I L3 Hybrid EDA Agent",
+      "duration_ms": 112356,
+      "tester_attempts": 1,
+      "model_calls": [
+        {
+          "step": 4,
+          "node_id": "coder",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 2400,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 497,
+            "completion_tokens": 1854,
+            "total_tokens": 2351
+          },
+          "duration_ms": 9168,
+          "finish_reason": "stop"
+        }
+      ],
+      "api_total_tokens": 2351,
+      "known_api_tokens": 2351,
+      "calls_missing_usage": 0,
+      "teacher_passed": true,
+      "cpu_capability": {
+        "level": 3,
+        "name": "rv32i",
+        "declared": 3,
+        "verified": 3,
+        "expected": 3,
+        "features": 7,
+        "declared_level": 3,
+        "verified_level": 3,
+        "expected_level": 3
+      },
+      "metrics": {
+        "status": "ok",
+        "library": "gscl45nm.lib",
+        "top_module": "rv32i5",
+        "area": 252372.1759,
+        "area_unit": "library area units (gscl45nm)",
+        "power_status": "ok",
+        "power_reason": null,
+        "power_method": "OpenSTA gate-level VCD estimate",
+        "internal_power_w": 0.0253,
+        "switching_power_w": 0.00267,
+        "dynamic_power_w": 0.02797,
+        "leakage_power_w": 0.00119,
+        "total_power_w": 0.0292,
+        "vcd_scope": "tb_power_agent_rv32i5/dut"
+      },
+      "performance": {
+        "benchmarks": [
+          {
+            "benchmark": "trained_branch64",
+            "cycles": 148,
+            "instructions": 132,
+            "branches": 64,
+            "mispredicts": 2,
+            "cpi": 1.121212,
+            "ipc": 0.891892
+          },
+          {
+            "benchmark": "teaching_crc32_64bytes",
+            "cycles": 4006,
+            "instructions": 3185,
+            "dmem_reads": 16,
+            "dmem_writes": 0,
+            "branches": 1088,
+            "mispredicts": 312,
+            "ooo_bypass": 7,
+            "clock_hz": 100000000,
+            "cpi": 1.257771,
+            "ipc": 0.795057
+          },
+          {
+            "benchmark": "teaching_array_sum64",
+            "cycles": 741,
+            "instructions": 324,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 15,
+            "clock_hz": 100000000,
+            "cpi": 2.287037,
+            "ipc": 0.437247
+          },
+          {
+            "benchmark": "teaching_branch_predict64",
+            "cycles": 480,
+            "instructions": 293,
+            "dmem_reads": 0,
+            "dmem_writes": 0,
+            "branches": 128,
+            "mispredicts": 66,
+            "ooo_bypass": 0,
+            "clock_hz": 100000000,
+            "cpi": 1.638225,
+            "ipc": 0.610417
+          },
+          {
+            "benchmark": "teaching_ooo_overlap64",
+            "cycles": 1583,
+            "instructions": 516,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 16,
+            "clock_hz": 100000000,
+            "cpi": 3.067829,
+            "ipc": 0.325963
+          }
+        ]
+      },
+      "teacher_reports": [
+        {
+          "artifact": "tester-01/test_report.json",
+          "sha256": "8142fd4ab5a7ff3159f35ead0941dab75bd05ae094a1c787c79afd2ced1ff1e1",
+          "passed": true,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=1|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=3|expected=3|features=7",
+            "LAB_RESULT: PASS (21 tests, 127737 checks)"
+          ],
+          "first_deviation": null,
+          "synthesis_error": null
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T144812633207",
+      "project_id": "rv32i5_ooo",
+      "status": "passed",
+      "created_at": "2026-11-09T14:48:12.633+00:00",
+      "finished_at": "2026-11-09T14:50:13.183+00:00",
+      "workflow": "RV32I L3 Hybrid EDA Agent",
+      "duration_ms": 111733,
+      "tester_attempts": 2,
+      "model_calls": [
+        {
+          "step": 2,
+          "node_id": "diagnoser",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 600,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 1188,
+            "completion_tokens": 234,
+            "total_tokens": 1422
+          },
+          "duration_ms": 2442,
+          "finish_reason": "stop"
+        },
+        {
+          "step": 3,
+          "node_id": "patch",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 1800,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 5869,
+            "completion_tokens": 312,
+            "total_tokens": 6181
+          },
+          "duration_ms": 2281,
+          "finish_reason": "stop"
+        }
+      ],
+      "api_total_tokens": 7603,
+      "known_api_tokens": 7603,
+      "calls_missing_usage": 0,
+      "teacher_passed": true,
+      "cpu_capability": {
+        "level": 3,
+        "name": "rv32i",
+        "declared": 3,
+        "verified": 3,
+        "expected": 3,
+        "features": 7,
+        "declared_level": 3,
+        "verified_level": 3,
+        "expected_level": 3
+      },
+      "metrics": {
+        "status": "ok",
+        "library": "gscl45nm.lib",
+        "top_module": "rv32i5",
+        "area": 252218.7148,
+        "area_unit": "library area units (gscl45nm)",
+        "power_status": "ok",
+        "power_reason": null,
+        "power_method": "OpenSTA gate-level VCD estimate",
+        "internal_power_w": 0.0248,
+        "switching_power_w": 0.00262,
+        "dynamic_power_w": 0.02742,
+        "leakage_power_w": 0.00119,
+        "total_power_w": 0.0286,
+        "vcd_scope": "tb_power_agent_rv32i5/dut"
+      },
+      "performance": {
+        "benchmarks": [
+          {
+            "benchmark": "trained_branch64",
+            "cycles": 148,
+            "instructions": 132,
+            "branches": 64,
+            "mispredicts": 2,
+            "cpi": 1.121212,
+            "ipc": 0.891892
+          },
+          {
+            "benchmark": "teaching_crc32_64bytes",
+            "cycles": 4006,
+            "instructions": 3185,
+            "dmem_reads": 16,
+            "dmem_writes": 0,
+            "branches": 1088,
+            "mispredicts": 312,
+            "ooo_bypass": 7,
+            "clock_hz": 100000000,
+            "cpi": 1.257771,
+            "ipc": 0.795057
+          },
+          {
+            "benchmark": "teaching_array_sum64",
+            "cycles": 741,
+            "instructions": 324,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 15,
+            "clock_hz": 100000000,
+            "cpi": 2.287037,
+            "ipc": 0.437247
+          },
+          {
+            "benchmark": "teaching_branch_predict64",
+            "cycles": 480,
+            "instructions": 293,
+            "dmem_reads": 0,
+            "dmem_writes": 0,
+            "branches": 128,
+            "mispredicts": 66,
+            "ooo_bypass": 0,
+            "clock_hz": 100000000,
+            "cpi": 1.638225,
+            "ipc": 0.610417
+          },
+          {
+            "benchmark": "teaching_ooo_overlap64",
+            "cycles": 1583,
+            "instructions": 516,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 16,
+            "clock_hz": 100000000,
+            "cpi": 3.067829,
+            "ipc": 0.325963
+          }
+        ]
+      },
+      "teacher_reports": [
+        {
+          "artifact": "tester-01/test_report.json",
+          "sha256": "2f277155a2fda28e9c6329fd9fcc825c2e2c8368edd43d6035c56cf338c9935c",
+          "passed": false,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=0|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=-1|expected=3|features=7",
+            "LAB_RESULT: FAIL (3 failures / 127737 checks)"
+          ],
+          "first_deviation": "AI_EDA_TRACE|cycle=417|test=t02_alu_r|event=check_reg|halted=1|exit_code=66|detail=x8_exp=0x03000000_got=0x00000006_FAIL",
+          "synthesis_error": null
+        },
+        {
+          "artifact": "tester-02/test_report.json",
+          "sha256": "76b02c0b7e5376ded4bf2e0bbb64bb66f7f2001958843c28803ab7a253d5300a",
+          "passed": true,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=1|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=3|expected=3|features=7",
+            "LAB_RESULT: PASS (21 tests, 127737 checks)"
+          ],
+          "first_deviation": null,
+          "synthesis_error": null
+        }
+      ]
+    },
+    {
+      "schema_version": 1,
+      "run_id": "agent-20261109T144926109204",
+      "project_id": "rv32i5_ooo",
+      "status": "passed",
+      "created_at": "2026-11-09T14:49:26.109+00:00",
+      "finished_at": "2026-11-09T14:51:25.890+00:00",
+      "workflow": "RV32I L3 Hybrid EDA Agent",
+      "duration_ms": 110987,
+      "tester_attempts": 1,
+      "model_calls": [
+        {
+          "step": 4,
+          "node_id": "coder",
+          "status": "info",
+          "model_options": {
+            "model": "DeepSeek-V4.1-Flash",
+            "temperature": 0.0,
+            "max_tokens": 2400,
+            "thinking": false,
+            "reasoning_effort": null,
+            "stream": false
+          },
+          "usage": {
+            "prompt_tokens": 497,
+            "completion_tokens": 1665,
+            "total_tokens": 2162
+          },
+          "duration_ms": 7231,
+          "finish_reason": "stop"
+        }
+      ],
+      "api_total_tokens": 2162,
+      "known_api_tokens": 2162,
+      "calls_missing_usage": 0,
+      "teacher_passed": true,
+      "cpu_capability": {
+        "level": 3,
+        "name": "rv32i",
+        "declared": 3,
+        "verified": 3,
+        "expected": 3,
+        "features": 7,
+        "declared_level": 3,
+        "verified_level": 3,
+        "expected_level": 3
+      },
+      "metrics": {
+        "status": "ok",
+        "library": "gscl45nm.lib",
+        "top_module": "rv32i5",
+        "area": 252190.5568,
+        "area_unit": "library area units (gscl45nm)",
+        "power_status": "ok",
+        "power_reason": null,
+        "power_method": "OpenSTA gate-level VCD estimate",
+        "internal_power_w": 0.0253,
+        "switching_power_w": 0.00267,
+        "dynamic_power_w": 0.02797,
+        "leakage_power_w": 0.00119,
+        "total_power_w": 0.0292,
+        "vcd_scope": "tb_power_agent_rv32i5/dut"
+      },
+      "performance": {
+        "benchmarks": [
+          {
+            "benchmark": "trained_branch64",
+            "cycles": 148,
+            "instructions": 132,
+            "branches": 64,
+            "mispredicts": 2,
+            "cpi": 1.121212,
+            "ipc": 0.891892
+          },
+          {
+            "benchmark": "teaching_crc32_64bytes",
+            "cycles": 4006,
+            "instructions": 3185,
+            "dmem_reads": 16,
+            "dmem_writes": 0,
+            "branches": 1088,
+            "mispredicts": 312,
+            "ooo_bypass": 7,
+            "clock_hz": 100000000,
+            "cpi": 1.257771,
+            "ipc": 0.795057
+          },
+          {
+            "benchmark": "teaching_array_sum64",
+            "cycles": 741,
+            "instructions": 324,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 15,
+            "clock_hz": 100000000,
+            "cpi": 2.287037,
+            "ipc": 0.437247
+          },
+          {
+            "benchmark": "teaching_branch_predict64",
+            "cycles": 480,
+            "instructions": 293,
+            "dmem_reads": 0,
+            "dmem_writes": 0,
+            "branches": 128,
+            "mispredicts": 66,
+            "ooo_bypass": 0,
+            "clock_hz": 100000000,
+            "cpi": 1.638225,
+            "ipc": 0.610417
+          },
+          {
+            "benchmark": "teaching_ooo_overlap64",
+            "cycles": 1583,
+            "instructions": 516,
+            "dmem_reads": 64,
+            "dmem_writes": 0,
+            "branches": 64,
+            "mispredicts": 2,
+            "ooo_bypass": 16,
+            "clock_hz": 100000000,
+            "cpi": 3.067829,
+            "ipc": 0.325963
+          }
+        ]
+      },
+      "teacher_reports": [
+        {
+          "artifact": "tester-01/test_report.json",
+          "sha256": "01f66a1743e3501c7736a74d05b941ea3be4fa4b46a7f0b325ae09e8d8a11e5c",
+          "passed": true,
+          "records": [
+            "AI_EDA_SUITE|name=base|passed=1|skipped=0|checks=104738",
+            "AI_EDA_SUITE|name=cache|passed=1|skipped=0|checks=1076",
+            "AI_EDA_SUITE|name=predictor|passed=1|skipped=0|checks=450",
+            "AI_EDA_SUITE|name=ooo|passed=1|skipped=0|checks=1020",
+            "AI_EDA_SUITE|name=performance_correctness|passed=1|skipped=0|checks=20452",
+            "AI_EDA_CAPABILITY|level=3|name=rv32i|declared=3|verified=3|expected=3|features=7",
+            "LAB_RESULT: PASS (21 tests, 127737 checks)"
+          ],
+          "first_deviation": null,
+          "synthesis_error": null
+        }
+      ]
+    }
+  ]
+}

@@ -718,7 +718,7 @@ async function clearAgentRuns() {
 async function loadAgentGraph() {
   const projectId = state.agent.projectId || "stream_filter";
   const [server, agentState] = await Promise.all([
-    api("/api/agent/graph"),
+    api(`/api/agent/graph?project=${encodeURIComponent(projectId)}`),
     api(`/api/agent/state?project=${encodeURIComponent(projectId)}`),
   ]);
   state.agent.projectId = agentState.project?.id || projectId;

@@ -82,7 +82,7 @@ function updateFollowLiveButton() {
 
 function agentDetailTabs(event) {
   if (!event) return [];
-  const isModelStep = ["parser", "planner", "coder", "modifier"].includes(event.node_id);
+  const isModelStep = ["parser", "planner", "coder", "modifier", "diagnoser", "patch"].includes(event.node_id);
   if (event.node_id === "tester") {
     return [{ id: "tools", label: "Tool output" }];
   }
@@ -392,7 +392,7 @@ function renderAgentModelOutput(container, event) {
   answerLabel.textContent = "Model answer";
   answer.append(answerLabel);
 
-  const structured = !running && ["parser", "planner", "modifier"].includes(event.node_id);
+  const structured = !running && ["parser", "planner", "modifier", "diagnoser"].includes(event.node_id);
   if (structured) {
     if (event.node_id === "parser") renderParserDetail(answer, event);
     else if (event.node_id === "planner") renderPlannerDetail(answer, event);

@@ -10,6 +10,7 @@ from ai_eda.rtl.runner import extract_rtl
 from ai_eda.agent.skills.rv32i5_l1_reference import load_reference
 
 from .base import SubAgent
+from .l3 import code_l3
 from .common import RV32I_L1_CODE_PATTERNS, RV32I_PIPELINE_CHECKLIST, safe_project_path
 
 
@@ -47,6 +48,8 @@ class CoderAgent(SubAgent):
         existing_files: dict[str, str] | None = None,
         start_module: str | None = None,
     ) -> Path:
+        if self.runtime.options.get("l3_mode"):
+            return code_l3(self, planner_handoff)
         incoming = self.runtime.read_handoff(planner_handoff)["payload"]
         artifacts = incoming.get("artifacts") or {}
         spec_ref = artifacts.get("spec")

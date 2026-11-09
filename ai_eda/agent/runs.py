@@ -11,6 +11,7 @@ from typing import Any
 
 from ai_eda.agent.projects import DEFAULT_PROJECT_ID, get_project, list_projects, project_public
 from ai_eda.agent.reporting import report_summary as _report_summary
+from ai_eda.agent.skills.rv32i5_ooo import PROJECT_ID as L3_PROJECT
 from ai_eda.config import (
     AGENT_CONTENT_ROOT,
     AGENT_FLOW_PATH,
@@ -36,6 +37,9 @@ HANDOFF_ARTIFACT_TITLES = {
     "plan": "RTL implementation plan",
     "rtl_manifest": "RTL 文件清单",
     "report": "验收报告",
+    "failure_packet": "失败证据摘要",
+    "repair_brief": "定向修复说明",
+    "patch": "补丁及版本记录",
     "combined_rtl": "组合 RTL",
 }
 
@@ -58,11 +62,23 @@ def _write_json(path: Path, payload: Any) -> None:
 
 
 
-def load_agent_graph() -> dict[str, Any]:
-    """读取默认 Agent 图；旧版 Spec/Report 节点会自动迁移掉。"""
-    return normalize_agent_graph(
-        json.loads(AGENT_DEFINITION_PATH.read_text(encoding="utf-8"))
-    )
+def load_agent_graph(project_id: str | None = None) -> dict[str, Any]:
+    """Return the fixed workflow for the selected project."""
+    graph = normalize_agent_graph(json.loads(AGENT_DEFINITION_PATH.read_text(encoding="utf-8")))
+    if project_id == L3_PROJECT:
+        graph["name"] = "RV32I L3 Hybrid EDA Agent"
+        graph["nodes"] = graph["nodes"][:-1] + [
+            {"id": "diagnoser", "type": "model", "title": "05 · Diagnoser",
+             "prompt": "Localize the failure from a bounded packet.", "x": 960, "y": 8},
+            {"id": "patch", "type": "model", "title": "06 · Patch Agent",
+             "prompt": "Apply anchored edits to selected files.", "x": 656, "y": 8,
+             "retry": {"target": "tester", "max": 8}},
+        ]
+        graph["edges"] = graph["edges"][:-1] + [
+            {"from": "tester", "to": "diagnoser"},
+            {"from": "diagnoser", "to": "patch"},
+        ]
+    return graph
 
 
 
@@ -387,6 +403,29 @@ def _write_metadata(
     if resumed_from:
         metadata["resumed_from"] = resumed_from
     _write_json(run_dir / "metadata.json", metadata)
+    events_path = run_dir / "events.json"
+    if events_path.is_file():
+        run = json.loads(events_path.read_text(encoding="utf-8"))
+        calls = [
+            {key: event.get(key) for key in ("step", "node_id", "status", "model_options",
+                                             "usage", "duration_ms", "finish_reason")}
+            for event in run.get("events", []) if event.get("call_index")
+        ]
+        known = [call["usage"]["total_tokens"] for call in calls
+                 if type((call["usage"] or {}).get("total_tokens")) is int]
+        report = run.get("report") or {}
+        _write_json(run_dir / "run_summary.json", {
+            "schema_version": 1,
+            "run_id": run_id, "project_id": project["id"], "status": status,
+            "created_at": started_at, "finished_at": finished_at,
+            "workflow": graph["name"], "duration_ms": run.get("duration_ms"),
+            "tester_attempts": sum(event.get("node_id") == "tester" for event in run.get("events", [])),
+            "model_calls": calls,
+            "api_total_tokens": sum(known) if len(known) == len(calls) else None,
+            "known_api_tokens": sum(known), "calls_missing_usage": len(calls) - len(known),
+            "teacher_passed": report.get("passed"), "cpu_capability": report.get("cpu_capability"),
+            "metrics": report.get("metrics"), "performance": report.get("performance"),
+        })
 
 
 

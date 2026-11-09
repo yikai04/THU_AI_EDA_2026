@@ -8,6 +8,7 @@ from pathlib import Path
 from ai_eda.agent.skills.fifo_area_power import evaluate as evaluate_fifo_skill
 
 from .base import SubAgent
+from .l3 import plan_l3
 from .common import PLANNER_SYSTEM_PROMPT, extract_json_payload, validate_plan
 
 
@@ -17,6 +18,8 @@ class PlannerAgent(SubAgent):
     node_type = "planner"
 
     def run(self, parser_handoff: Path) -> Path:
+        if self.runtime.options.get("l3_mode"):
+            return plan_l3(self, parser_handoff)
         incoming = self.runtime.read_handoff(parser_handoff)["payload"]
         artifacts = incoming.get("artifacts") or {}
         spec_ref = artifacts.get("spec")

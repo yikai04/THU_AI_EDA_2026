@@ -622,7 +622,7 @@ class WorkbenchHandler(SimpleHTTPRequestHandler):
             elif path == "/api/agent/state":
                 self._send_json(agent_state_payload(project_id))
             elif path == "/api/agent/graph":
-                self._send_json(load_agent_graph())
+                self._send_json(load_agent_graph(project_id))
             elif path == "/api/agent/designs":
                 self._send_json({"designs": list_agent_designs()})
             elif path.startswith("/api/agent/designs/"):

@@ -59,6 +59,7 @@ class RunContext:
         system_prompt: str,
         *,
         model_options: dict[str, Any] | None = None,
+        stream: bool | None = None,
     ) -> dict[str, Any]:
         """单轮模型调用：内部包装成 system + user 的消息历史。"""
         messages = [
@@ -66,7 +67,7 @@ class RunContext:
             {"role": "user", "content": prompt},
         ]
         return self.call_model_messages(
-            event, messages, artifact_prompt=prompt, model_options=model_options
+            event, messages, artifact_prompt=prompt, model_options=model_options, stream=stream
         )
 
     def call_model_messages(
@@ -76,6 +77,7 @@ class RunContext:
         *,
         artifact_prompt: str | None = None,
         model_options: dict[str, Any] | None = None,
+        stream: bool | None = None,
     ) -> dict[str, Any]:
         """使用已有消息历史做模型调用，支持 Modifier 等子 Agent 的多轮上下文。"""
         if self.max_calls > 0 and self.model_calls >= self.max_calls:
@@ -87,17 +89,40 @@ class RunContext:
         event["call_index"] = self.model_calls
         event["conversation_messages"] = len(messages)
         client = self.make_client(model_options)
+        if stream is None:
+            stream = self.options.get("model_stream", True)
+        event["model_options"] = {
+            "model": client.MODEL_NAME,
+            "temperature": client.temperature,
+            "max_tokens": client.max_tokens,
+            "thinking": client.thinking,
+            "reasoning_effort": client.reasoning_effort if client.thinking else None,
+            "stream": stream,
+        }
+        artifact_dir = self.run_dir / f"step-{event['step']:02d}-{event['node_id']}"
+        artifact_dir.mkdir(exist_ok=True)
+        prompt_for_artifact = artifact_prompt or str(messages[-1].get("content") or "")
+        (artifact_dir / "prompt.md").write_text(prompt_for_artifact, encoding="utf-8")
+        (artifact_dir / "conversation.json").write_text(
+            json.dumps(messages, ensure_ascii=False, indent=2) + "\n",
+            encoding="utf-8",
+        )
+        self.check_cancel()
         answer_parts: list[str] = []
         reasoning_parts: list[str] = []
         usage: dict[str, Any] | None = None
         finish_reason: str | None = None
         last_emit = 0.0
         last_persist = 0.0
-        event["streaming"] = True
+        event["streaming"] = stream
         event["reasoning"] = ""
         event["response"] = ""
         event["output_tokens"] = 0
-        for chunk in client.stream_chat_detail(messages):
+        chunks = (
+            client.stream_chat_detail(messages)
+            if stream else ({"type": "done", **client._complete_detail(messages)},)
+        )
+        for chunk in chunks:
             self.check_cancel()
             kind = chunk.get("type")
             if kind == "reasoning":
@@ -130,14 +155,6 @@ class RunContext:
             "usage": usage,
             "finish_reason": finish_reason,
         }
-        artifact_dir = self.run_dir / f"step-{event['step']:02d}-{event['node_id']}"
-        artifact_dir.mkdir(exist_ok=True)
-        prompt_for_artifact = artifact_prompt or str(messages[-1].get("content") or "")
-        (artifact_dir / "prompt.md").write_text(prompt_for_artifact, encoding="utf-8")
-        (artifact_dir / "conversation.json").write_text(
-            json.dumps(messages, ensure_ascii=False, indent=2) + "\n",
-            encoding="utf-8",
-        )
         (artifact_dir / "raw_response.txt").write_text(answer, encoding="utf-8")
         if reasoning:
             (artifact_dir / "reasoning.txt").write_text(reasoning, encoding="utf-8")
@@ -145,6 +162,7 @@ class RunContext:
         event["raw_response"] = answer
         event["reasoning"] = reasoning
         event["usage"] = usage
+        event["finish_reason"] = finish_reason
         event["output_tokens"] = reported_output_tokens(usage, answer + (reasoning or ""))
         event["streaming"] = False
         return result

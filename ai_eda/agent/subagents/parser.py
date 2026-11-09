@@ -5,6 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from .base import SubAgent
+from .l3 import parse_l3
 from .common import MAX_PARSER_ROUNDS, PARSER_SYSTEM_PROMPT, extract_json_payload
 
 
@@ -24,6 +25,8 @@ class ParserAgent(SubAgent):
         return "\n\n".join(part for part in parts if part)
 
     def run(self, input_handoff: Path) -> Path:
+        if self.runtime.options.get("l3_mode"):
+            return parse_l3(self, input_handoff)
         incoming = self.runtime.read_handoff(input_handoff)["payload"]
         artifacts = incoming.get("artifacts") or {}
         spec_ref = artifacts.get("spec")

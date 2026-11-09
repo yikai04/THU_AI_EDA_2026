@@ -14,6 +14,8 @@ from pathlib import Path
 from typing import Any, Callable
 
 from ai_eda.agent.projects import get_project
+from ai_eda.agent.skills.rv32i5_ooo import PROJECT_ID as L3_PROJECT, digest, snapshot
+from ai_eda.agent.subagents.l3 import DiagnoserAgent, PatchAgent
 from ai_eda.agent.runs import (
     AgentCancelled,
     _now,
@@ -97,10 +99,22 @@ def _load_resume_source(run_id: str) -> dict[str, Any]:
     title = str((failed_event or {}).get("title") or "")
     module_name = title.rsplit(" · ", 1)[-1] if stage == "coder" and " · " in title else None
     project_files: dict[str, str] = {}
-    project_rtl = source / "project" / "rtl"
-    if project_rtl.is_dir():
-        for path in sorted(project_rtl.glob("*.sv")):
-            project_files[f"rtl/{path.name}"] = path.read_text(encoding="utf-8")
+    manifests = sorted(artifacts.glob("rtl_manifest_[0-9][0-9].json"))
+    if manifests:
+        manifest = json.loads(manifests[-1].read_text(encoding="utf-8"))
+        for entry in manifest["files"]:
+            artifact = (source / entry["artifact"]).resolve()
+            if source not in artifact.parents:
+                raise ValueError("续跑的 RTL artifact 越出原运行目录")
+            content = artifact.read_text(encoding="utf-8")
+            if digest(content) != entry["sha256"]:
+                raise ValueError(f"续跑的 RTL artifact 哈希不匹配：{entry['path']}")
+            project_files[entry["path"]] = content
+    else:
+        project_rtl = source / "project" / "rtl"
+        if project_rtl.is_dir():
+            for path in sorted(project_rtl.glob("*.sv")):
+                project_files[f"rtl/{path.name}"] = path.read_text(encoding="utf-8")
     return {
         "run_id": name,
         "spec": spec,
@@ -112,6 +126,7 @@ def _load_resume_source(run_id: str) -> dict[str, Any]:
         "event": failed_event,
         "project_files": project_files,
         "source_status": events_payload.get("status"),
+        "project_id": events_payload.get("project_id"),
     }
 
 
@@ -173,19 +188,19 @@ def _seed_resume_project(
     files = source.get("project_files") or {}
     if not isinstance(files, dict) or not files:
         raise ValueError("上一次运行没有可续跑的 RTL 项目文件")
-    entries: list[dict[str, Any]] = []
-    for relative, content in files.items():
-        target = safe_project_path(context.run_dir, relative)
-        target.parent.mkdir(parents=True, exist_ok=True)
-        target.write_text(content, encoding="utf-8")
-        entries.append(
+    if context.options.get("l3_mode"):
+        manifest_ref = snapshot(context, files, 1)
+    else:
+        _copy_resume_files(context, files)
+        entries = [
             {
                 "path": relative,
-                "artifact": context.artifact_ref(target),
+                "artifact": context.artifact_ref(safe_project_path(context.run_dir, relative)),
                 "bytes": len(content.encode("utf-8")),
             }
-        )
-    manifest_ref = context.write_json_artifact("rtl_manifest_resume.json", {"files": entries})
+            for relative, content in files.items()
+        ]
+        manifest_ref = context.write_json_artifact("rtl_manifest_resume.json", {"files": entries})
     tester_input = context.write_handoff(
         "coder",
         "tester",
@@ -217,13 +232,13 @@ def run_agent(
     design_name: str | None = None,
     project_id: str | None = None,
     request_input: Callable[[dict[str, Any]], str] | None = None,
+    l3_mode: str | None = None,
 ) -> dict[str, Any]:
-    """运行固定流水线：Parser → Planner → Coder → Tester ⇄ Modifier。
+    """运行固定流水线，L3 使用 Diagnoser 与 Patch Agent 分段修复。
 
     ``graph.json`` 只是该固定流程的只读可视化，不参与调度。每个 Agent 都从上游
     handoff 中取得 artifact 引用，再按引用读取 Spec、RTL 或报告内容。
     """
-    graph = load_agent_graph()
     if reasoning_effort not in {"low", "high", "max"}:
         raise ValueError("reasoning_effort 无效")
     if not 1 <= int(max_calls) <= 1000:
@@ -232,6 +247,12 @@ def run_agent(
         raise ValueError("max_repair_attempts 必须在 1 到 10 之间")
     max_tester_attempts = int(max_repair_attempts) + 1
     project = get_project(project_id)
+    if l3_mode is not None and (project["id"] != L3_PROJECT or l3_mode not in {"hybrid", "reference", "legacy"}):
+        raise ValueError("l3_mode requires the L3 project and hybrid, reference or legacy mode")
+    if project["id"] == L3_PROJECT and l3_mode is None:
+        l3_mode = "hybrid"
+    split_repair = l3_mode in {"hybrid", "reference"}
+    graph = load_agent_graph(L3_PROJECT if split_repair else None)
     spec_base = agent_task_spec(project["id"])
     run_id = f"agent-{datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S%f')}"
     run_dir = AGENT_RUNS_ROOT / run_id
@@ -321,6 +342,8 @@ def run_agent(
                 "reasoning_effort": reasoning_effort,
                 "planner_skill": bool(planner_skill),
                 "project": project,
+                "l3_mode": l3_mode if split_repair else None,
+                "model_stream": l3_mode != "legacy",
             },
             begin_event=begin_event,
             finish_event=finish_event,
@@ -332,10 +355,16 @@ def run_agent(
         )
         if resume_from:
             resume_source = _load_resume_source(resume_from)
+            if resume_source.get("project_id") and resume_source["project_id"] != project["id"]:
+                raise ValueError("续跑的来源必须属于同一个项目")
             effective_spec = resume_source["spec"]
             plan = resume_source["plan"]
             parser_result = resume_source.get("parser_result") or {}
             resume_stage = str(resume_source.get("stage") or "coder")
+            if split_repair and resume_stage in {"modifier", "diagnoser", "patch"}:
+                resume_stage = "tester"
+            if split_repair and resume_stage == "coder" and not (plan or {}).get("spec_sha256"):
+                resume_stage = "planner"
             if resume_stage == "modifier":
                 # 续跑从 Modifier 输入开始；随后第一次 Tester 应使用第 2 轮，
                 # 避免与 seed 的 tester_to_modifier_attempt1.json 重名。
@@ -437,7 +466,11 @@ def run_agent(
             next_tester_input = coder.run(planner_handoff)
 
         tester = TesterAgent(context)
-        modifier = ModifierAgent(context)
+        if split_repair:
+            diagnoser = DiagnoserAgent(context)
+            patcher = PatchAgent(context)
+        else:
+            modifier = ModifierAgent(context)
         while True:
             tester_attempts += 1
             tester_handoff = tester.run(next_tester_input, tester_attempts)
@@ -455,7 +488,11 @@ def run_agent(
             if tester_attempts >= int(max_tester_attempts):
                 break
             check_cancel()
-            next_tester_input = modifier.run(tester_handoff, tester_attempts)
+            if split_repair:
+                diagnosis = diagnoser.run(tester_handoff, tester_attempts)
+                next_tester_input = patcher.run(diagnosis, tester_attempts)
+            else:
+                next_tester_input = modifier.run(tester_handoff, tester_attempts)
 
         if final_report is None:
             raise ValueError("Tester 没有产出验收报告")
@@ -549,9 +586,7 @@ def run_agent(
         current_status = "failed"
         for pending in events:
             if pending.get("status") in {"running", "waiting_input"}:
-                pending.update(
-                    {"status": "failed", "finished_at": _now(), "error": str(error)}
-                )
+                finish_event(pending, "failed", error=str(error))
         payload = _run_payload(
             run_id=run_id,
             run_dir=run_dir,

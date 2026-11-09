@@ -75,6 +75,16 @@ def build_parser() -> argparse.ArgumentParser:
     summary_parser = subcommands.add_parser("summarize", help="汇总一个任务的全部实验记录")
     _add_task_argument(summary_parser)
 
+    agent_parser = subcommands.add_parser("agent", help="运行课程 EDA Agent 并保存验收记录")
+    agent_parser.add_argument("--project", required=True)
+    agent_parser.add_argument("--l3-mode", choices=("hybrid", "reference", "legacy"))
+    agent_parser.add_argument("--max-tokens", type=int, default=2400)
+    agent_parser.add_argument("--max-calls", type=int, default=12)
+    agent_parser.add_argument("--max-repair-attempts", type=int, default=3)
+    agent_parser.add_argument("--temperature", type=float, default=0.0)
+    agent_parser.add_argument("--thinking", action="store_true")
+    agent_parser.add_argument("--resume-from")
+
     serve_parser = subcommands.add_parser("serve", help="启动本地可视化工作台")
     serve_parser.add_argument("--host", default="127.0.0.1")
     serve_parser.add_argument("--port", type=int, default=8000)
@@ -115,6 +125,27 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "summarize":
         _print_json(summarize_task(args.task))
         return 0
+
+    if args.command == "agent":
+        import sys
+
+        from ai_eda.agent import run_agent
+
+        seen_steps = set()
+
+        def progress(event):
+            if event["status"] == "running" and event["step"] not in seen_steps:
+                seen_steps.add(event["step"])
+                print(f"{event['run_id']} · {event['title']}", file=sys.stderr)
+
+        run = run_agent(
+            project_id=args.project, l3_mode=args.l3_mode, max_tokens=args.max_tokens,
+            temperature=args.temperature, thinking=args.thinking, max_calls=args.max_calls,
+            max_repair_attempts=args.max_repair_attempts, resume_from=args.resume_from,
+            on_event=progress,
+        )
+        _print_json({key: run[key] for key in ("run_id", "run_dir", "status", "duration_ms")})
+        return 0 if run["status"] == "passed" else 1
 
     if args.command == "serve":
         from ai_eda.web.server import serve

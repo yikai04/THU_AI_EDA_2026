@@ -158,6 +158,9 @@ const HANDOFF_LABELS = {
   coder_to_tester: "Coder → Tester",
   tester_to_modifier: "Tester → Modifier",
   modifier_to_tester: "Modifier → Tester",
+  tester_to_diagnoser: "Tester → Diagnoser",
+  diagnoser_to_patch: "Diagnoser → Patch Agent",
+  patch_to_tester: "Patch Agent → Tester",
   tester_to_summary: "Tester → Summary",
 };
 

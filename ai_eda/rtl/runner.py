@@ -399,7 +399,7 @@ def test_rtl(
             report.setdefault("cpu_capability", {})["expected_level"] = expected_cpu_level
         if any(not suite["passed"] for suite in report.get("test_suites", []) if "passed" in suite and not suite.get("skipped")):
             report["passed"] = False
-        if run_dir is not None:
+        if run_dir is not None and report["passed"]:
             if power_testbench_path is not None and power_testbench_top is not None:
                 power_testbench_path = _require_file(power_testbench_path, "功耗测试平台文件")
                 power_executable = temp_path / "power_simulation.vvp"
