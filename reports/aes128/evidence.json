@@ -1,0 +1,163 @@
+{
+  "adopted_run": "hw-20261109T125846517500",
+  "runs": [
+    {
+      "run_id": "hw-20261109T121240534252",
+      "parameters": {
+        "model": "DeepSeek-V4.1-Flash",
+        "temperature": 0.2,
+        "thinking": false,
+        "max_tokens": 8192,
+        "generation_mode": "single_call_streamed",
+        "finish_reason": "stop",
+        "usage": null
+      },
+      "prompt_sha256": "ed3057e57471f0151228bb140c3746bac8eefa002442cbf695ecba660e595ae8",
+      "rtl_sha256": "2cb2844ea194d80b5d24fa5d8b600b3a9619b853066aa6dd6d29b55066a224db",
+      "wall_seconds_to_first_tb": null,
+      "teacher_passed": false,
+      "teacher_stdout": "AI_EDA_TRACE|cycle=4|test=reset|event=ready|ok=1|detail=ready_high\nAI_EDA_TRACE|cycle=4|test=reset|event=done|ok=1|detail=done_low\nAI_EDA_TRACE|cycle=5|test=fips_c1|event=start|ok=1|detail=start_asserted\nCHECK: fips_c1 — ciphertext 不一致：得到 60aa77d8db9fddbb78ece2260c45a18a，期望 69c4e0d86a7b0430d8cdb78070b4c55a\nAI_EDA_TRACE|cycle=144|test=fips_c1|event=done|ok=0|detail=ciphertext_mismatch\nAI_EDA_TRACE|cycle=145|test=fips_c1|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=145|test=fips_c1|event=ready_after_done|ok=1|detail=ready_restored\nAI_EDA_TRACE|cycle=145|test=fips_c2|event=start|ok=1|detail=start_asserted\nCHECK: fips_c2 — ciphertext 不一致：得到 67269ee32a2b3b095e249393b813ce28，期望 66e94bd4ef8a2c3b884cfa59ca342b2e\nAI_EDA_TRACE|cycle=284|test=fips_c2|event=done|ok=0|detail=ciphertext_mismatch\nAI_EDA_TRACE|cycle=285|test=fips_c2|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=285|test=fips_c2|event=ready_after_done|ok=1|detail=ready_restored\nAI_EDA_TRACE|cycle=285|test=fips_b|event=start|ok=1|detail=start_asserted\nCHECK: fips_b — ciphertext 不一致：得到 283ca6265a7a57ab7312ce0af8e6c7a2，期望 3925841d02dc09fbdc118597196a0b32\nAI_EDA_TRACE|cycle=424|test=fips_b|event=done|ok=0|detail=ciphertext_mismatch\nAI_EDA_TRACE|cycle=425|test=fips_b|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=425|test=fips_b|event=ready_after_done|ok=1|detail=ready_restored\nAI_EDA_TRACE|cycle=425|test=fips_c1_repeat|event=start|ok=1|detail=start_asserted\nCHECK: fips_c1_repeat — ciphertext 不一致：得到 60aa77d8db9fddbb78ece2260c45a18a，期望 69c4e0d86a7b0430d8cdb78070b4c55a\nAI_EDA_TRACE|cycle=564|test=fips_c1_repeat|event=done|ok=0|detail=ciphertext_mismatch\nAI_EDA_TRACE|cycle=565|test=fips_c1_repeat|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=565|test=fips_c1_repeat|event=ready_after_done|ok=1|detail=ready_restored\nAI_EDA_TRACE|cycle=571|test=mid_reset|event=done_cleared|ok=1|detail=done_cleared\nAI_EDA_TRACE|cycle=571|test=mid_reset|event=ready_restored|ok=1|detail=ready_ok\nAI_EDA_TRACE|cycle=572|test=after_mid_reset|event=start|ok=1|detail=start_asserted\nCHECK: after_mid_reset — ciphertext 不一致：得到 60aa77d8db9fddbb78ece2260c45a18a，期望 69c4e0d86a7b0430d8cdb78070b4c55a\nAI_EDA_TRACE|cycle=711|test=after_mid_reset|event=done|ok=0|detail=ciphertext_mismatch\nAI_EDA_TRACE|cycle=712|test=after_mid_reset|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=712|test=after_mid_reset|event=ready_after_done|ok=1|detail=ready_restored\nLAB_RESULT: FAIL (5 checks)\nFATAL: /home/yikai/projects/THU_AI_EDA_2026/content/tasks/homework_aes128/tb.sv:225: \n       Time: 7116000 Scope: tb_homework_aes128\n",
+      "checks": [
+        {
+          "name": "fips_c1",
+          "detail": "ciphertext 不一致：得到 60aa77d8db9fddbb78ece2260c45a18a，期望 69c4e0d86a7b0430d8cdb78070b4c55a"
+        },
+        {
+          "name": "fips_c2",
+          "detail": "ciphertext 不一致：得到 67269ee32a2b3b095e249393b813ce28，期望 66e94bd4ef8a2c3b884cfa59ca342b2e"
+        },
+        {
+          "name": "fips_b",
+          "detail": "ciphertext 不一致：得到 283ca6265a7a57ab7312ce0af8e6c7a2，期望 3925841d02dc09fbdc118597196a0b32"
+        },
+        {
+          "name": "fips_c1_repeat",
+          "detail": "ciphertext 不一致：得到 60aa77d8db9fddbb78ece2260c45a18a，期望 69c4e0d86a7b0430d8cdb78070b4c55a"
+        },
+        {
+          "name": "after_mid_reset",
+          "detail": "ciphertext 不一致：得到 60aa77d8db9fddbb78ece2260c45a18a，期望 69c4e0d86a7b0430d8cdb78070b4c55a"
+        }
+      ],
+      "metrics": null
+    },
+    {
+      "run_id": "hw-20261109T125846517500",
+      "parameters": {
+        "model": "DeepSeek-V4.1-Flash",
+        "temperature": 0.2,
+        "thinking": false,
+        "max_tokens": 16384,
+        "generation_mode": "single_call_streamed",
+        "finish_reason": "stop",
+        "usage": null
+      },
+      "prompt_sha256": "81f888d9757083a6820cda2d146efdf58e43ae17f8e989d62ba57ccb11b7946e",
+      "rtl_sha256": "ce1883f825c545a4548e2a1c39c2b42d3660ef633ebf7250ab9a04fd0cb54ff3",
+      "wall_seconds_to_first_tb": null,
+      "teacher_passed": true,
+      "teacher_stdout": "AI_EDA_TRACE|cycle=4|test=reset|event=ready|ok=1|detail=ready_high\nAI_EDA_TRACE|cycle=4|test=reset|event=done|ok=1|detail=done_low\nAI_EDA_TRACE|cycle=5|test=fips_c1|event=start|ok=1|detail=start_asserted\nAI_EDA_TRACE|cycle=96|test=fips_c1|event=done|ok=1|detail=ciphertext_ok\nAI_EDA_TRACE|cycle=97|test=fips_c1|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=97|test=fips_c1|event=ready_after_done|ok=1|detail=ready_restored\nAI_EDA_TRACE|cycle=97|test=fips_c2|event=start|ok=1|detail=start_asserted\nAI_EDA_TRACE|cycle=188|test=fips_c2|event=done|ok=1|detail=ciphertext_ok\nAI_EDA_TRACE|cycle=189|test=fips_c2|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=189|test=fips_c2|event=ready_after_done|ok=1|detail=ready_restored\nAI_EDA_TRACE|cycle=189|test=fips_b|event=start|ok=1|detail=start_asserted\nAI_EDA_TRACE|cycle=280|test=fips_b|event=done|ok=1|detail=ciphertext_ok\nAI_EDA_TRACE|cycle=281|test=fips_b|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=281|test=fips_b|event=ready_after_done|ok=1|detail=ready_restored\nAI_EDA_TRACE|cycle=281|test=fips_c1_repeat|event=start|ok=1|detail=start_asserted\nAI_EDA_TRACE|cycle=372|test=fips_c1_repeat|event=done|ok=1|detail=ciphertext_ok\nAI_EDA_TRACE|cycle=373|test=fips_c1_repeat|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=373|test=fips_c1_repeat|event=ready_after_done|ok=1|detail=ready_restored\nAI_EDA_TRACE|cycle=379|test=mid_reset|event=done_cleared|ok=1|detail=done_cleared\nAI_EDA_TRACE|cycle=379|test=mid_reset|event=ready_restored|ok=1|detail=ready_ok\nAI_EDA_TRACE|cycle=380|test=after_mid_reset|event=start|ok=1|detail=start_asserted\nAI_EDA_TRACE|cycle=471|test=after_mid_reset|event=done|ok=1|detail=ciphertext_ok\nAI_EDA_TRACE|cycle=472|test=after_mid_reset|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=472|test=after_mid_reset|event=ready_after_done|ok=1|detail=ready_restored\nLAB_RESULT: PASS (5 vectors)\n",
+      "checks": [],
+      "metrics": {
+        "status": "ok",
+        "library": "gscl45nm.lib",
+        "top_module": "aes128",
+        "area": 24534.0654,
+        "area_unit": "library area units (gscl45nm)",
+        "power_status": "ok",
+        "power_reason": null,
+        "power_method": "OpenSTA gate-level VCD estimate",
+        "internal_power_w": 0.00125,
+        "switching_power_w": 0.000351,
+        "dynamic_power_w": 0.001601,
+        "leakage_power_w": 9.9e-05,
+        "total_power_w": 0.0017,
+        "vcd_scope": "tb_power_homework_aes128/dut"
+      }
+    },
+    {
+      "run_id": "report-aes128-20261110T083711",
+      "parameters": {
+        "model": "DeepSeek-V4.1-Flash",
+        "temperature": 0.2,
+        "thinking": false,
+        "max_tokens": 16384,
+        "generation_mode": "single_call_no_feedback",
+        "finish_reason": "stop",
+        "usage": null
+      },
+      "prompt_sha256": "81f888d9757083a6820cda2d146efdf58e43ae17f8e989d62ba57ccb11b7946e",
+      "rtl_sha256": "9da7f658ba736f444251f0bf2d2b8194028f3ea44579a11e5b13cc50f79085e8",
+      "wall_seconds_to_first_tb": 30.521,
+      "teacher_passed": false,
+      "teacher_stdout": "AI_EDA_TRACE|cycle=4|test=reset|event=ready|ok=1|detail=ready_high\nAI_EDA_TRACE|cycle=4|test=reset|event=done|ok=1|detail=done_low\nAI_EDA_TRACE|cycle=5|test=fips_c1|event=start|ok=1|detail=start_asserted\nCHECK: fips_c1 — ciphertext 不一致：得到 2c5adafbdd70bf094cb2ee8c89fcf527，期望 69c4e0d86a7b0430d8cdb78070b4c55a\nAI_EDA_TRACE|cycle=116|test=fips_c1|event=done|ok=0|detail=ciphertext_mismatch\nAI_EDA_TRACE|cycle=117|test=fips_c1|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=117|test=fips_c1|event=ready_after_done|ok=1|detail=ready_restored\nAI_EDA_TRACE|cycle=117|test=fips_c2|event=start|ok=1|detail=start_asserted\nCHECK: fips_c2 — ciphertext 不一致：得到 9d9a5cf8e4f0d187d305de9de48aaa35，期望 66e94bd4ef8a2c3b884cfa59ca342b2e\nAI_EDA_TRACE|cycle=228|test=fips_c2|event=done|ok=0|detail=ciphertext_mismatch\nAI_EDA_TRACE|cycle=229|test=fips_c2|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=229|test=fips_c2|event=ready_after_done|ok=1|detail=ready_restored\nAI_EDA_TRACE|cycle=229|test=fips_b|event=start|ok=1|detail=start_asserted\nCHECK: fips_b — ciphertext 不一致：得到 25f0af72a271afd1b148bd29fd8a84d4，期望 3925841d02dc09fbdc118597196a0b32\nAI_EDA_TRACE|cycle=340|test=fips_b|event=done|ok=0|detail=ciphertext_mismatch\nAI_EDA_TRACE|cycle=341|test=fips_b|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=341|test=fips_b|event=ready_after_done|ok=1|detail=ready_restored\nAI_EDA_TRACE|cycle=341|test=fips_c1_repeat|event=start|ok=1|detail=start_asserted\nCHECK: fips_c1_repeat — ciphertext 不一致：得到 2c5adafbdd70bf094cb2ee8c89fcf527，期望 69c4e0d86a7b0430d8cdb78070b4c55a\nAI_EDA_TRACE|cycle=452|test=fips_c1_repeat|event=done|ok=0|detail=ciphertext_mismatch\nAI_EDA_TRACE|cycle=453|test=fips_c1_repeat|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=453|test=fips_c1_repeat|event=ready_after_done|ok=1|detail=ready_restored\nAI_EDA_TRACE|cycle=459|test=mid_reset|event=done_cleared|ok=1|detail=done_cleared\nAI_EDA_TRACE|cycle=459|test=mid_reset|event=ready_restored|ok=1|detail=ready_ok\nAI_EDA_TRACE|cycle=460|test=after_mid_reset|event=start|ok=1|detail=start_asserted\nCHECK: after_mid_reset — ciphertext 不一致：得到 2c5adafbdd70bf094cb2ee8c89fcf527，期望 69c4e0d86a7b0430d8cdb78070b4c55a\nAI_EDA_TRACE|cycle=571|test=after_mid_reset|event=done|ok=0|detail=ciphertext_mismatch\nAI_EDA_TRACE|cycle=572|test=after_mid_reset|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=572|test=after_mid_reset|event=ready_after_done|ok=1|detail=ready_restored\nLAB_RESULT: FAIL (5 checks)\nFATAL: /home/yikai/projects/THU_AI_EDA_2026/content/tasks/homework_aes128/tb.sv:225: \n       Time: 5716000 Scope: tb_homework_aes128\n",
+      "checks": [
+        {
+          "name": "fips_c1",
+          "detail": "ciphertext 不一致：得到 2c5adafbdd70bf094cb2ee8c89fcf527，期望 69c4e0d86a7b0430d8cdb78070b4c55a"
+        },
+        {
+          "name": "fips_c2",
+          "detail": "ciphertext 不一致：得到 9d9a5cf8e4f0d187d305de9de48aaa35，期望 66e94bd4ef8a2c3b884cfa59ca342b2e"
+        },
+        {
+          "name": "fips_b",
+          "detail": "ciphertext 不一致：得到 25f0af72a271afd1b148bd29fd8a84d4，期望 3925841d02dc09fbdc118597196a0b32"
+        },
+        {
+          "name": "fips_c1_repeat",
+          "detail": "ciphertext 不一致：得到 2c5adafbdd70bf094cb2ee8c89fcf527，期望 69c4e0d86a7b0430d8cdb78070b4c55a"
+        },
+        {
+          "name": "after_mid_reset",
+          "detail": "ciphertext 不一致：得到 2c5adafbdd70bf094cb2ee8c89fcf527，期望 69c4e0d86a7b0430d8cdb78070b4c55a"
+        }
+      ],
+      "metrics": null
+    },
+    {
+      "run_id": "report-aes128-usage-20261110T083919",
+      "parameters": {
+        "model": "DeepSeek-V4.1-Flash",
+        "temperature": 0.2,
+        "thinking": false,
+        "max_tokens": 16384,
+        "generation_mode": "single_call_streamed",
+        "finish_reason": "stop",
+        "usage": {
+          "prompt_tokens": 3424,
+          "completion_tokens": 6250,
+          "total_tokens": 9674
+        }
+      },
+      "prompt_sha256": "81f888d9757083a6820cda2d146efdf58e43ae17f8e989d62ba57ccb11b7946e",
+      "rtl_sha256": "33d48527e3207db85b270dbc363fdec6a50b51962fea467261e0c3b61d482607",
+      "wall_seconds_to_first_tb": 26.841,
+      "teacher_passed": false,
+      "teacher_stdout": "AI_EDA_TRACE|cycle=4|test=reset|event=ready|ok=1|detail=ready_high\nAI_EDA_TRACE|cycle=4|test=reset|event=done|ok=1|detail=done_low\nAI_EDA_TRACE|cycle=5|test=fips_c1|event=start|ok=1|detail=start_asserted\nCHECK: fips_c1 — ciphertext 不一致：得到 2c5adafbdd70bf094cb2ee8c89fcf527，期望 69c4e0d86a7b0430d8cdb78070b4c55a\nAI_EDA_TRACE|cycle=106|test=fips_c1|event=done|ok=0|detail=ciphertext_mismatch\nAI_EDA_TRACE|cycle=107|test=fips_c1|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=107|test=fips_c1|event=ready_after_done|ok=1|detail=ready_restored\nAI_EDA_TRACE|cycle=107|test=fips_c2|event=start|ok=1|detail=start_asserted\nCHECK: fips_c2 — ciphertext 不一致：得到 9d9a5cf8e4f0d187d305de9de48aaa35，期望 66e94bd4ef8a2c3b884cfa59ca342b2e\nAI_EDA_TRACE|cycle=208|test=fips_c2|event=done|ok=0|detail=ciphertext_mismatch\nAI_EDA_TRACE|cycle=209|test=fips_c2|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=209|test=fips_c2|event=ready_after_done|ok=1|detail=ready_restored\nAI_EDA_TRACE|cycle=209|test=fips_b|event=start|ok=1|detail=start_asserted\nCHECK: fips_b — ciphertext 不一致：得到 25f0af72a271afd1b148bd29fd8a84d4，期望 3925841d02dc09fbdc118597196a0b32\nAI_EDA_TRACE|cycle=310|test=fips_b|event=done|ok=0|detail=ciphertext_mismatch\nAI_EDA_TRACE|cycle=311|test=fips_b|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=311|test=fips_b|event=ready_after_done|ok=1|detail=ready_restored\nAI_EDA_TRACE|cycle=311|test=fips_c1_repeat|event=start|ok=1|detail=start_asserted\nCHECK: fips_c1_repeat — ciphertext 不一致：得到 2c5adafbdd70bf094cb2ee8c89fcf527，期望 69c4e0d86a7b0430d8cdb78070b4c55a\nAI_EDA_TRACE|cycle=412|test=fips_c1_repeat|event=done|ok=0|detail=ciphertext_mismatch\nAI_EDA_TRACE|cycle=413|test=fips_c1_repeat|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=413|test=fips_c1_repeat|event=ready_after_done|ok=1|detail=ready_restored\nAI_EDA_TRACE|cycle=419|test=mid_reset|event=done_cleared|ok=1|detail=done_cleared\nAI_EDA_TRACE|cycle=419|test=mid_reset|event=ready_restored|ok=1|detail=ready_ok\nAI_EDA_TRACE|cycle=420|test=after_mid_reset|event=start|ok=1|detail=start_asserted\nCHECK: after_mid_reset — ciphertext 不一致：得到 2c5adafbdd70bf094cb2ee8c89fcf527，期望 69c4e0d86a7b0430d8cdb78070b4c55a\nAI_EDA_TRACE|cycle=521|test=after_mid_reset|event=done|ok=0|detail=ciphertext_mismatch\nAI_EDA_TRACE|cycle=522|test=after_mid_reset|event=done_pulse|ok=1|detail=done_one_cycle\nAI_EDA_TRACE|cycle=522|test=after_mid_reset|event=ready_after_done|ok=1|detail=ready_restored\nLAB_RESULT: FAIL (5 checks)\nFATAL: /home/yikai/projects/THU_AI_EDA_2026/content/tasks/homework_aes128/tb.sv:225: \n       Time: 5216000 Scope: tb_homework_aes128\n",
+      "checks": [
+        {
+          "name": "fips_c1",
+          "detail": "ciphertext 不一致：得到 2c5adafbdd70bf094cb2ee8c89fcf527，期望 69c4e0d86a7b0430d8cdb78070b4c55a"
+        },
+        {
+          "name": "fips_c2",
+          "detail": "ciphertext 不一致：得到 9d9a5cf8e4f0d187d305de9de48aaa35，期望 66e94bd4ef8a2c3b884cfa59ca342b2e"
+        },
+        {
+          "name": "fips_b",
+          "detail": "ciphertext 不一致：得到 25f0af72a271afd1b148bd29fd8a84d4，期望 3925841d02dc09fbdc118597196a0b32"
+        },
+        {
+          "name": "fips_c1_repeat",
+          "detail": "ciphertext 不一致：得到 2c5adafbdd70bf094cb2ee8c89fcf527，期望 69c4e0d86a7b0430d8cdb78070b4c55a"
+        },
+        {
+          "name": "after_mid_reset",
+          "detail": "ciphertext 不一致：得到 2c5adafbdd70bf094cb2ee8c89fcf527，期望 69c4e0d86a7b0430d8cdb78070b4c55a"
+        }
+      ],
+      "metrics": null
+    }
+  ]
+}
