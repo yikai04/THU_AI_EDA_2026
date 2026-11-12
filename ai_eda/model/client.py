@@ -22,8 +22,8 @@ class ModelClient:
     """课程实验共用的 DeepSeek 单模型客户端。"""
 
     # 当前课程默认使用 Flash：速度快、成本低，适合 Prompt 实验的重复采样。
-    MODEL_NAME = "deepseek-flash"
-    BASE_URL = "https://api.deepseek.com"
+    MODEL_NAME = "DeepSeek-V4.1-Flash"
+    BASE_URL = "https://llmapi.paratera.com"
 
     # 如需更强的复杂 RTL / Agent 推理能力，可将上一行改为：
     # MODEL_NAME = "deepseek-v4-pro"
